@@ -44,8 +44,17 @@ scram b
 
 5. Run the script:
 ```
-python3 scripts/vhcc_cards.py
+python3 scripts/vhcc_cards.py -c Zll -y 2022_postEE
 ```  
 
 The datacards and root file with re-arranged shapes should appear under `output` directory.
 
+6. Create Combine workspace from the datacards:
+```
+combineTool.py -M T2W -o "ws.root" -i output/output/vhcc_Run3_2022_postEE/*
+```  
+
+7. Run the limit:
+```
+combineTool.py -M AsymptoticLimits -d output/output/vhcc_Run3_2022_postEE/ws.root --there --run blind
+```  
