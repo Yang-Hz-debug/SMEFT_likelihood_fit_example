@@ -101,18 +101,18 @@ def createCards():
     systs.AddCommonSystematics(cb, year)
     
 
-    if args.bbb==0:
-        cb.AddDatacardLineAtEnd("* autoMCStats -1")
-    elif args.bbb==1:
-        cb.AddDatacardLineAtEnd("* autoMCStats 0")
+    #if args.bbb==0:
+    #    cb.AddDatacardLineAtEnd("* autoMCStats -1")
+    #elif args.bbb==1:
+    #    cb.AddDatacardLineAtEnd("* autoMCStats 0")
     
     for chn in chns:
         if chn in ['Zll','Zmm','Zee']:
-            input_root_file = "./vhcc_shapes_2L.root"
+            input_root_file = "./vhcc_shapes_"+year+"_2L.root"
         elif chn in ['Wln','Wmn','Wen']:
-            input_root_file = "./vhcc_shapes_1L.root"
+            input_root_file = "./vhcc_shapes_"+year+"_1L.root"
         elif chn in ['Znn']:
-            input_root_file = "./vhcc_shapes_0L.root"
+            input_root_file = "./vhcc_shapes_"+year+"_0L.root"
         
         cb.cp().channel([chn]).signals().bin_id([1,3,4,5,6]).ExtractShapes(
             input_root_file, year+'_$BIN/$PROCESS_Shape_nominal', 'Shape_$BIN_$PROCESS_$SYSTEMATIC')    
@@ -121,8 +121,8 @@ def createCards():
         
 
         
-    print('binning in TT CRs: [0., 1.0] for Zll channels')
-    cb.cp().channel(['Zee','Zmm']).bin_id([7]).VariableRebin([0., 1.0])
+    #print('binning in TT CRs: [0., 1.0] for Zll channels')
+    #cb.cp().channel(['Zee','Zmm']).bin_id([5]).VariableRebin([0., 1.0])
         
     ch.SetStandardBinNames(cb)
        

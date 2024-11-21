@@ -97,26 +97,26 @@ def AddCommonSystematics(cb, year=None):
 
   ### RATEPARAMS (aka SCALE FACTORS) for TT, Z+Jets and W+jets processes
   
-  # TT proc in 2L channel
-  cb.cp().channel(['Zee','Zmm']).process(['TT']).AddSyst(cb,
-     'SF_TT_2L_'+year, 'rateParam', ch.SystMap('bin_id')
-     ([1,3,4,5,6],  1.0))
-
-  # Zj_ll 2L
-  cb.cp().channel(['Zee','Zmm']).process(['Zj_ll']).AddSyst(cb,
-     'SF_Zj_ll_2L_'+year, 'rateParam', ch.SystMap('bin_id')
-     ([1,3,4,5,6],  1.0))
-
-  # Zj_bj 2L
-  cb.cp().channel(['Zee','Zmm']).process(['Zj_bj']).AddSyst(cb,
-     'SF_Zj_bj_2L_'+year, 'rateParam', ch.SystMap('bin_id')
-     ([1,3,4,5,6],1.0))
-
-  # Zj_cj 2L
-  cb.cp().channel(['Zee','Zmm']).process(['Zj_cj']).AddSyst(cb,
-     'SF_Zj_cj_2L_'+year, 'rateParam', ch.SystMap('bin_id')
-     ([1,3,4,5,6],1.0))
-
+###  # TT proc in 2L channel
+###  cb.cp().channel(['Zee','Zmm']).process(['TT']).AddSyst(cb,
+###     'SF_TT_2L_'+year, 'rateParam', ch.SystMap('bin_id')
+###     ([1,3,4,5,6],  1.0))
+###
+###  # Zj_ll 2L
+###  cb.cp().channel(['Zee','Zmm']).process(['Zj_ll']).AddSyst(cb,
+###     'SF_Zj_ll_2L_'+year, 'rateParam', ch.SystMap('bin_id')
+###     ([1,3,4,5,6],  1.0))
+###
+###  # Zj_bj 2L
+###  cb.cp().channel(['Zee','Zmm']).process(['Zj_bj']).AddSyst(cb,
+###     'SF_Zj_bj_2L_'+year, 'rateParam', ch.SystMap('bin_id')
+###     ([1,3,4,5,6],1.0))
+###
+###  # Zj_cj 2L
+###  cb.cp().channel(['Zee','Zmm']).process(['Zj_cj']).AddSyst(cb,
+###     'SF_Zj_cj_2L_'+year, 'rateParam', ch.SystMap('bin_id')
+###     ([1,3,4,5,6],1.0))
+###
 
   # Uncertainties specific to data-taking period:
   if year == '2016':
@@ -127,7 +127,7 @@ def AddCommonSystematics(cb, year=None):
     cb.cp().process(['Wj_bj']).AddSyst(cb,'Norm_Wj_bj_2018', 'lnN', ch.SystMap()(1.50))
 
   elif year in ['2022_preEE','2022_postEE','2023_preBPix','2023_postBPix']:
-    cb.cp().process(['Wj_bj']).AddSyst(cb,'Norm_Wj_bj_'+year, 'lnN', ch.SystMap()(1.50))    
+    cb.cp().process(['Wj_bj']).AddSyst(cb,'Norm_Wj_bj_'+year, 'lnN', ch.SystMap()(1.50))
     
 
   
