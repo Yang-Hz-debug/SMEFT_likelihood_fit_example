@@ -101,10 +101,10 @@ def createCards():
     systs.AddCommonSystematics(cb, year)
     
 
-    #if args.bbb==0:
-    #    cb.AddDatacardLineAtEnd("* autoMCStats -1")
-    #elif args.bbb==1:
-    #    cb.AddDatacardLineAtEnd("* autoMCStats 0")
+    if args.bbb==0:
+        cb.AddDatacardLineAtEnd("* autoMCStats -1")
+    elif args.bbb==1:
+        cb.AddDatacardLineAtEnd("* autoMCStats 0")
     
     for chn in chns:
         if chn in ['Zll','Zmm','Zee']:
@@ -121,8 +121,8 @@ def createCards():
         
 
         
-    #print('binning in TT CRs: [0., 1.0] for Zll channels')
-    #cb.cp().channel(['Zee','Zmm']).bin_id([5]).VariableRebin([0., 1.0])
+    #print('binning in TT CRs: [0., 1000.0] for Zll channels')
+    #cb.cp().channel(['Zee','Zmm']).bin_id([5]).VariableRebin([0., 1000.0])
         
     ch.SetStandardBinNames(cb)
        
