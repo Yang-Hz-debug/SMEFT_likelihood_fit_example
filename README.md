@@ -51,7 +51,7 @@ The datacards and root file with re-arranged shapes should appear under `output`
 
 6. Create Combine workspace from the datacards:
 ```
-combineTool.py -M T2W -o "ws.root" -i output/output/vhcc_Run3_2022_postEE/*
+combineTool.py -M T2W --cc combined.txt -o ws.root -i output/output/vhcc_Run3_2022_postEE/*
 ```  
 
 7. Run the limit:
