@@ -57,5 +57,5 @@ combineTool.py -M T2W --cc combined.txt -o ws.root -i output/vhcc_Run3_2022_post
 
 7. Run the limit:
 ```
-combineTool.py -M AsymptoticLimits -d output/vhcc_Run3_2022_postEE/ws.root --there --run blind
+combineTool.py -M AsymptoticLimits -d ws.root --there --run blind
 ```  
