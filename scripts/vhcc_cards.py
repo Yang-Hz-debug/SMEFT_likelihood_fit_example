@@ -12,7 +12,7 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
-    '-c', '--channel', default='all', help="""Which channels to run? Supported options: 'all', 'Zee', 'Zmm', 'Zll', 'Wen', 'Wmn','Wln'""")
+    '-c', '--channel', default='all', help="""Which channels to run? Supported options: 'all', 'Zee', 'Zmm', 'Zll', 'Wen', 'Wmn','Wln','Znn'""")
 parser.add_argument(
     '-o','--output_folder', default='vhcc_Run3', help="""Subdirectory of ./output/ where the cards are written out to""")
 parser.add_argument(
@@ -72,11 +72,17 @@ def createCards():
         #'Zmm' : ['ZH_hbb','ggZH_hbb','s_Top','TT','Zj_ll','Zj_bj','Zj_cj','VVother','VZcc'],
         'Zmm' : ['TT','Zj_ll','Zj_cj','Zj_bj','WW','WZ','ZZ'],
         'Zee' : ['TT','Zj_ll','Zj_cj','Zj_bj','WW','WZ','ZZ'],
+        'Wmn' : ['TT','Wj_ll','Wj_cj','Wj_bj','WW','WZ','ZZ'],
+        'Wen' : ['TT','Wj_ll','Wj_cj','Wj_bj','WW','WZ','ZZ'],
+        'Znn' : ['TT','Wj_ll','Wj_cj','Wj_bj','Zj_ll','Zj_cj','Zj_bj','WW','WZ','ZZ'],
     }
     
     sig_procs = {
         'Zmm' : ['ZH_hcc'],
         'Zee' : ['ZH_hcc'],
+        'Wmn' : ['WH_hcc'],
+        'Wen' : ['WH_hcc'],
+        'Znn' : ['ZH_hcc']
     }
     
     cats = {
@@ -91,7 +97,16 @@ def createCards():
             #(1, 'SR_high_Zmm'), (2, 'SR_low_Zmm'), (3, 'Zlf_high_Zmm'), (4,'Zlf_low_Zmm'),
             #(5, 'Zhf_high_Zee'), (6, 'Zhf_low_Zee'),
             #(7,'ttbar_high_Zee'), (8,'ttbar_low_Zee'),(9,'Zcc_high_Zee'), (10,'Zcc_low_Zee')
-        ]
+        ],
+        'Wmn' : [
+            (1, 'Wmn_SR'), (3, 'Wmn_CR_HF'), (4,'Wmn_CR_LF'), (5,'Wmn_CR_TT'), (6,'Wmn_CR_CC')
+        ],
+        'Wen' : [
+            (1, 'Wen_SR'), (3, 'Wen_CR_HF'), (4,'Wen_CR_LF'), (5,'Wen_CR_TT'), (6,'Wen_CR_CC')
+        ],
+        'Znn' : [
+            (1, 'Znn_SR'), (3, 'Znn_CR_HF'), (4,'Znn_CR_LF'), (5,'Znn_CR_TT'), (6,'Znn_CR_CC')
+        ],
     }
     for chn in chns:
         cb.AddObservations( ['*'], ['vhcc'], ['13p6TeV'], [chn], cats[chn])
