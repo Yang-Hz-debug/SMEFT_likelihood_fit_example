@@ -126,6 +126,42 @@ def AddCommonSystematics(cb, year=None):
                                                             'SF_Zj_cj_2L_hiZPT_'+year, 'rateParam', ch.SystMap('bin_id')
                                                             ([2,4,6,8,10],1.0))
 
+
+  # TT in 1L channel
+  cb.cp().channel(['Wen','Wmn']).process(['TT']).AddSyst(cb,
+                                                         'SF_TT_1L_'+year, 'rateParam', ch.SystMap('bin_id')
+                                                         ([1,3,5,7,9],  1.0))
+  # Wj_ll in 1L AND 0L
+  cb.cp().channel(['Wen','Wmn','Znn']).process(['Wj_ll']).AddSyst(cb,
+                                                                  'SF_Wj_ll_1L0L_'+year, 'rateParam', ch.SystMap('bin_id')
+                                                                  ([1,3,5,7,9],  1.0))
+  # Wj_bj in 1L AND 0L
+  cb.cp().channel(['Wen','Wmn','Znn']).process(['Wj_bj']).AddSyst(cb,
+                                                                  'SF_Wj_bj_1L0L_'+year, 'rateParam', ch.SystMap('bin_id')
+                                                                  ([1,3,5,7,9],1.0))
+  # Wj_cj in 1L AND 0L
+  cb.cp().channel(['Wen','Wmn','Znn']).process(['Wj_cj']).AddSyst(cb,
+                                                                  'SF_Wj_cj_1L0L_'+year, 'rateParam', ch.SystMap('bin_id')
+                                                                  ([1,3,5,7,9],1.0))
+  
+  
+  # TT in 0L channel
+  cb.cp().channel(['Znn']).process(['TT']).AddSyst(cb,
+                                                   'SF_TT_0L_'+year, 'rateParam', ch.SystMap('bin_id')
+                                                   ([1,3,5,7,9],  1.0))
+  # Zj_ll in 0L
+  cb.cp().channel(['Znn']).process(['Zj_ll']).AddSyst(cb,
+                                                      'SF_Zj_ll_0L_'+year, 'rateParam', ch.SystMap('bin_id')
+                                                      ([1,3,5,7,9],  1.0))
+  # Zj_bj in 0L
+  cb.cp().channel(['Znn']).process(['Zj_bj']).AddSyst(cb,
+                                                      'SF_Zj_bj_0L_'+year, 'rateParam', ch.SystMap('bin_id')
+                                                      ([1,3,5,7,9],1.0))
+  # Zj_cj in 0L
+  cb.cp().channel(['Znn']).process(['Zj_cj']).AddSyst(cb,
+                                                      'SF_Zj_cj_0L_'+year, 'rateParam', ch.SystMap('bin_id')
+                                                      ([1,3,5,7,9],1.0))
+  
   for syst in cb.cp().syst_type(["rateParam"]).syst_name_set():
     cb.GetParameter(syst).set_range(0.0,5.0)
 
