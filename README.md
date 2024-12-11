@@ -44,7 +44,7 @@ scram b
 
 5. Run the script:
 ```
-python3 scripts/vhcc_cards.py -c Zll -y 2022_postEE
+python3 scripts/vhcc_cards.py -c Zll -y 2022_preEE
 ```  
 
 The datacards and root file with re-arranged shapes should appear under `output` directory.
@@ -52,7 +52,7 @@ The datacards and root file with re-arranged shapes should appear under `output`
 6. Create Combine workspace from the datacards:
 ```
 ulimit -s unlimited
-combineTool.py -M T2W --cc combined.txt -o ws.root -i output/vhcc_Run3_2022_postEE/*.txt
+combineTool.py -M T2W --cc combined.txt -o ws.root -i output/vhcc_Run3_2022_preEE/*.txt
 ```  
 
 7. Run the limit:
