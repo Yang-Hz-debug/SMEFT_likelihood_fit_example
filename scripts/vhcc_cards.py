@@ -72,9 +72,9 @@ def createCards():
         #'Zmm' : ['ZH_hbb','ggZH_hbb','s_Top','TT','Zj_ll','Zj_bj','Zj_cj','VVother','VZcc'],
         'Zmm' : ['ZH_hbb','ggZH_hbb','TT','Zj_ll','Zj_cj','Zj_bj','WW','WZ','ZZ','ST'],
         'Zee' : ['ZH_hbb','ggZH_hbb','TT','Zj_ll','Zj_cj','Zj_bj','WW','WZ','ZZ','ST'],
-        'Wmn' : ['WH_hbb','TT','Zj_ll','Zj_cj','Zj_bj','Wj_ll','Wj_cj','Wj_bj','WW','WZ','ZZ','ST'],
-        'Wen' : ['WH_hbb','TT','Zj_ll','Zj_cj','Zj_bj','Wj_ll','Wj_cj','Wj_bj','WW','WZ','ZZ','ST'],
-        'Znn' : ['ZH_hbb','ggZH_hbb','TT','Wj_ll','Wj_cj','Wj_bj','Zj_ll','Zj_cj','Zj_bj','WW','WZ','ZZ','ST']
+        'Wmn' : ['WH_hbb','TT','TT_2L','Zj_ll','Zj_cj','Zj_bj','Wj_ll','Wj_cj','Wj_bj','WW','WZ','ZZ','ST'],
+        'Wen' : ['WH_hbb','TT','TT_2L','Zj_ll','Zj_cj','Zj_bj','Wj_ll','Wj_cj','Wj_bj','WW','WZ','ZZ','ST'],
+        'Znn' : ['ZH_hbb','ggZH_hbb','TT','TT_Had','Wj_ll','Wj_cj','Wj_bj','Zj_ll','Zj_cj','Zj_bj','WW','WZ','ZZ','ST']
     }
 
     sig_procs = {
