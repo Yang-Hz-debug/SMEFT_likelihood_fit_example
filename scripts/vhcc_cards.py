@@ -70,11 +70,11 @@ def createCards():
 
     bkg_procs = {
         #'Zmm' : ['ZH_hbb','ggZH_hbb','s_Top','TT','Zj_ll','Zj_bj','Zj_cj','VVother','VZcc'],
-        'Zmm' : ['ZH_hbb','ggZH_hbb','TT','Zj_ll','Zj_cj','Zj_bj','WW','WZ','ZZ','ST'],
-        'Zee' : ['ZH_hbb','ggZH_hbb','TT','Zj_ll','Zj_cj','Zj_bj','WW','WZ','ZZ','ST'],
-        'Wmn' : ['WH_hbb','TT','TT_2L','Zj_ll','Zj_cj','Zj_bj','Wj_ll','Wj_cj','Wj_bj','WW','WZ','ZZ','ST'],
-        'Wen' : ['WH_hbb','TT','TT_2L','Zj_ll','Zj_cj','Zj_bj','Wj_ll','Wj_cj','Wj_bj','WW','WZ','ZZ','ST'],
-        'Znn' : ['ZH_hbb','ggZH_hbb','TT','TT_Had','Wj_ll','Wj_cj','Wj_bj','Zj_ll','Zj_cj','Zj_bj','WW','WZ','ZZ','ST']
+        'Zmm' : ['ZH_hbb','ggZH_hbb','TT','Zj_ll','Zj_cj','Zj_bj','WW','WZbb','WZcc','WZqq','ZZbb','ZZcc','ZZqq','ST'],
+        'Zee' : ['ZH_hbb','ggZH_hbb','TT','Zj_ll','Zj_cj','Zj_bj','WW','WZbb','WZcc','WZqq','ZZbb','ZZcc','ZZqq','ST'],
+        'Wmn' : ['WH_hbb','TT','TT_2L','Zj_ll','Zj_cj','Zj_bj','Wj_ll','Wj_cj','Wj_bj','WW','WZbb','WZcc','WZqq','ZZbb','ZZcc','ZZqq','ST'],
+        'Wen' : ['WH_hbb','TT','TT_2L','Zj_ll','Zj_cj','Zj_bj','Wj_ll','Wj_cj','Wj_bj','WW','WZbb','WZcc','WZqq','ZZbb','ZZcc','ZZqq','ST'],
+        'Znn' : ['ZH_hbb','ggZH_hbb','TT','TT_Had','Wj_ll','Wj_cj','Wj_bj','Zj_ll','Zj_cj','Zj_bj','ST','WW','WZbb','WZcc','WZqq','ZZbb','ZZcc','ZZqq']
     }
 
     sig_procs = {
@@ -138,7 +138,11 @@ def createCards():
 
 
     # Use one bin in TT CR for Zll channels:
-    cb.cp().channel(['Zee','Zmm']).bin_id([7,8]).VariableRebin([0.,1.])
+    # cb.cp().channel(['Zee','Zmm']).bin_id([7,8]).VariableRebin([0.,1.])
+    cb.cp().channel(['Zee','Zmm']).bin_id([5,6]).VariableRebin([0.,1])
+    cb.cp().channel(['Zee','Zmm']).bin_id([3,4,7,8,9,10]).VariableRebin([0.0,0.4,0.6,0.8,1.0])
+    cb.cp().channel(['Wen','Wmn','Znn']).bin_id([5]).VariableRebin([0.,1])
+    # cb.cp().channel(['Wen','Wmn','Znn']).bin_id([3,7,9]).VariableRebin([0.0,0.5,0.75,1.0])
 
     ch.SetStandardBinNames(cb)
 
