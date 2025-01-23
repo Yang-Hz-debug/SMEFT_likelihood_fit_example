@@ -132,9 +132,9 @@ def createCards():
             input_root_file = "./vhcc_shapes_"+year+"_0L.root"
 
         cb.cp().channel([chn]).signals().bin_id([1,2,3,4,5,6,7,8,9,10]).ExtractShapes(
-            input_root_file, year+'_$BIN/$PROCESS_Shape_nominal', 'Shape_$BIN_$PROCESS_$SYSTEMATIC')
+            input_root_file, year+'_$BIN/$PROCESS_nominal', '$BIN_$PROCESS_$SYSTEMATIC')
         cb.cp().channel([chn]).backgrounds().bin_id([1,2,3,4,5,6,7,8,9,10]).ExtractShapes(
-            input_root_file, year+'_$BIN/$PROCESS_Shape_nominal', 'Shape_$BIN_$PROCESS_$SYSTEMATIC')
+            input_root_file, year+'_$BIN/$PROCESS_nominal', '$BIN_$PROCESS_$SYSTEMATIC')
 
 
     # Use one bin in TT CR for Zll channels:
