@@ -70,19 +70,19 @@ def createCards():
 
     bkg_procs = {
         #'Zmm' : ['ZH_hbb','ggZH_hbb','s_Top','TT','Zj_ll','Zj_bj','Zj_cj','VVother','VZcc'],
-        'Zmm' : ['TT','Zj_ll','Zj_cj','Zj_bj','WZ','ZZ'],
-        'Zee' : ['TT','Zj_ll','Zj_cj','Zj_bj','WZ','ZZ'],
-        'Wmn' : ['TT','Wj_ll','Wj_cj','Wj_bj','WW','WZ','ZZ'],
-        'Wen' : ['TT','Wj_ll','Wj_cj','Wj_bj','WW','WZ','ZZ'],
-        'Znn' : ['TT', 'TT_Had','Wj_ll','Wj_cj','Wj_bj','Zj_ll','Zj_cj','Zj_bj','WW','WZ','ZZ'],
+        'Zmm' : ['ZH_hbb','ggZH_hbb','TT','Zj_ll','Zj_cj','Zj_bj','WW','WZbb','WZcc','WZqq','ZZbb','ZZcc','ZZqq','ST'],
+        'Zee' : ['ZH_hbb','ggZH_hbb','TT','Zj_ll','Zj_cj','Zj_bj','WW','WZbb','WZcc','WZqq','ZZbb','ZZcc','ZZqq','ST'],
+        'Wmn' : ['WH_hbb','TT','TT_2L','Zj_ll','Zj_cj','Zj_bj','Wj_ll','Wj_cj','Wj_bj','WW','WZbb','WZcc','WZqq','ZZbb','ZZcc','ZZqq','ST'],
+        'Wen' : ['WH_hbb','TT','TT_2L','Zj_ll','Zj_cj','Zj_bj','Wj_ll','Wj_cj','Wj_bj','WW','WZbb','WZcc','WZqq','ZZbb','ZZcc','ZZqq','ST'],
+        'Znn' : ['ZH_hbb','ggZH_hbb','TT','TT_Had','Wj_ll','Wj_cj','Wj_bj','Zj_ll','Zj_cj','Zj_bj','ST','WW','WZbb','WZcc','WZqq','ZZbb','ZZcc','ZZqq']
     }
 
     sig_procs = {
-        'Zmm' : ['ZH_hcc'],
-        'Zee' : ['ZH_hcc'],
+        'Zmm' : ['ZH_hcc','ggZH_hcc'],
+        'Zee' : ['ZH_hcc','ggZH_hcc'],
         'Wmn' : ['WH_hcc'],
         'Wen' : ['WH_hcc'],
-        'Znn' : ['ZH_hcc']
+        'Znn' : ['ZH_hcc','ggZH_hcc']
     }
 
     cats = {
@@ -132,13 +132,17 @@ def createCards():
             input_root_file = "./vhcc_shapes_"+year+"_0L.root"
 
         cb.cp().channel([chn]).signals().bin_id([1,2,3,4,5,6,7,8,9,10]).ExtractShapes(
-            input_root_file, year+'_$BIN/$PROCESS_nominal', '$BIN_$PROCESS_$SYSTEMATIC')
+            input_root_file, year+'_$BIN/$PROCESS_nominal', year+'_$BIN/$PROCESS_$SYSTEMATIC')
         cb.cp().channel([chn]).backgrounds().bin_id([1,2,3,4,5,6,7,8,9,10]).ExtractShapes(
-            input_root_file, year+'_$BIN/$PROCESS_nominal', '$BIN_$PROCESS_$SYSTEMATIC')
+            input_root_file, year+'_$BIN/$PROCESS_nominal', year+'_$BIN/$PROCESS_$SYSTEMATIC')
 
 
     # Use one bin in TT CR for Zll channels:
-    cb.cp().channel(['Zee','Zmm']).bin_id([7,8]).VariableRebin([0.,1.])
+    # cb.cp().channel(['Zee','Zmm']).bin_id([7,8]).VariableRebin([0.,1.])
+    cb.cp().channel(['Zee','Zmm']).bin_id([5,6]).VariableRebin([0.,1])
+    cb.cp().channel(['Zee','Zmm']).bin_id([3,4,7,8,9,10]).VariableRebin([0.0,0.4,0.6,0.8,1.0])
+    cb.cp().channel(['Wen','Wmn','Znn']).bin_id([5]).VariableRebin([0.,1])
+    # cb.cp().channel(['Wen','Wmn','Znn']).bin_id([3,7,9]).VariableRebin([0.0,0.5,0.75,1.0])
 
     ch.SetStandardBinNames(cb)
 

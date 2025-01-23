@@ -94,6 +94,14 @@ def AddCommonSystematics(cb, year=None):
   ### #cb.cp().process(['VVother']).AddSyst(cb,'CMS_LHE_weights_scale_muF_VVother','shape',ch.SystMap()(1.0))
   ### #cb.cp().process(['VZcc']).AddSyst(cb,'CMS_LHE_weights_scale_muF_VZcc','shape',ch.SystMap()(1.0))
 
+  # 'JER_AK4PFPuppiDown', 'JER_AK4PFPuppiUp', 'JES_Total_AK4PFPuppiDown', 'JES_Total_AK4PFPuppiUp', 'nominal', 'pileupDown', 'pileupUp', 'sf_ele_idDown', 'sf_ele_idUp', 'sf_ele_recoDown', 'sf_ele_recoUp', 'sf_mu_idDown', 'sf_mu_idUp', 'sf_mu_isoDown', 'sf_mu_isoUp'
+  cb.cp().AddSyst(cb,'JER_AK4PFPuppi','shape',ch.SystMap()(1.0))
+  cb.cp().AddSyst(cb,'JES_Total_AK4PFPuppi','shape',ch.SystMap()(1.0))
+  cb.cp().AddSyst(cb,'pileup','shape',ch.SystMap()(1.0))
+  cb.cp().AddSyst(cb,'sf_ele_id','shape',ch.SystMap()(1.0))
+  cb.cp().AddSyst(cb,'sf_ele_reco','shape',ch.SystMap()(1.0))
+  cb.cp().AddSyst(cb,'sf_mu_id','shape',ch.SystMap()(1.0))
+  cb.cp().AddSyst(cb,'sf_mu_iso','shape',ch.SystMap()(1.0))
 
   ### RATEPARAMS (aka SCALE FACTORS) for TT, Z+Jets and W+jets processes
 
