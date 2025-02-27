@@ -63,8 +63,6 @@ def AddCommonSystematics(cb, year=None):
   #cb.cp().process(['VVother']).AddSyst(cb,'CMS_LHE_pdf_VVother', 'lnN', ch.SystMap()(1.0135))
 
 
-
-
   # Theoretical Renormalization and Factorization scale uncertainties
   ### Shapes are not implemented yet. Need input from coffea
   ### cb.cp().process(['ZH_hbb','ZH_hcc']).AddSyst(cb,'CMS_LHE_weights_scale_muR_ZH','shape',ch.SystMap()(1.0))

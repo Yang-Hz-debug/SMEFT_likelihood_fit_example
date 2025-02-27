@@ -48,16 +48,14 @@ def createCards():
 
     chns = []
     if args.channel=="all":
-        # At the moment only 2L channels are supported:
-        chns = ['Zee','Zmm']
-        #chns = ['Wen','Wmn','Znn','Zee','Zmm']
+        chns = ['Zee','Zmm','Wen','Wmn','Znn','Zee','Zmm']
     if 'Zll' in args.channel or 'Zmm' in args.channel:
         chns.append('Zmm')
     if 'Zll' in args.channel or 'Zee' in args.channel:
         chns.append('Zee')
-    if 'Wln' in args.channel or 'Wmn' in args.channel or 'Znn' in args.channel:
+    if 'Wln' in args.channel or 'Wmn' in args.channel:
         chns.append('Wmn')
-    if 'Wln' in args.channel or 'Wen' in args.channel or 'Znn' in args.channel:
+    if 'Wln' in args.channel or 'Wen' in args.channel:
         chns.append('Wen')
     if 'Znn' in args.channel:
         chns.append('Znn')
@@ -159,8 +157,12 @@ def createCards():
     writer.SetWildcardMasses([])
     writer.SetVerbosity(0)
 
-    writer.WriteCards("./",cb)
-
+    # Finally, write the cards to disk
+    # Combined cars in ./cmb sub-dir
+    writer.WriteCards("cmb",cb)
+    # Per channel cards, like so:
+    for chn in chns:
+        writer.WriteCards(chn,cb.cp().channel([chn]))
 
 
 if __name__ == "__main__":
