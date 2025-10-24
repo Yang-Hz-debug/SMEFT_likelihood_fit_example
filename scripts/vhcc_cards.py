@@ -67,12 +67,13 @@ def createCards():
         sys.exit()
 
     bkg_procs = {
-        #'Zmm' : ['ZH_hbb','ggZH_hbb','s_Top','TT','Zj_ll','Zj_bj','Zj_cj','VVother','VZcc'],
         'Zmm' : ['ZH_hbb','ggZH_hbb','TT','Zj_ll','Zj_cj','Zj_bj','WW','WZbb','WZcc','WZqq','ZZbb','ZZcc','ZZqq','ST'],
         'Zee' : ['ZH_hbb','ggZH_hbb','TT','Zj_ll','Zj_cj','Zj_bj','WW','WZbb','WZcc','WZqq','ZZbb','ZZcc','ZZqq','ST'],
-        'Wmn' : ['WH_hbb','TT','TT_2L','Zj_ll','Zj_cj','Zj_bj','Wj_ll','Wj_cj','Wj_bj','WW','WZbb','WZcc','WZqq','ZZbb','ZZcc','ZZqq','ST'],
-        'Wen' : ['WH_hbb','TT','TT_2L','Zj_ll','Zj_cj','Zj_bj','Wj_ll','Wj_cj','Wj_bj','WW','WZbb','WZcc','WZqq','ZZbb','ZZcc','ZZqq','ST'],
-        'Znn' : ['ZH_hbb','ggZH_hbb','TT','TT_Had','Wj_ll','Wj_cj','Wj_bj','Zj_ll','Zj_cj','Zj_bj','ST','WW','WZbb','WZcc','WZqq','ZZbb','ZZcc','ZZqq']
+        'Wmn' : ['WH_hbb','TT','Zj_ll','Zj_cj','Zj_bj','Wj_ll','Wj_cj','Wj_bj','WW','WZbb','WZcc','WZqq','ST','QCD'],
+        'Wen' : ['WH_hbb','TT','Zj_ll','Zj_cj','Zj_bj','Wj_ll','Wj_cj','Wj_bj','WW','WZbb','WZcc','WZqq','ST','QCD'],
+        #'Wmn' : ['WH_hbb','TT','Zj_ll','Zj_cj','Zj_bj','Wj_ll','Wj_cj','Wj_bj','WW','WZbb','WZcc','WZqq','ZZbb','ZZcc','ZZqq','ST','QCD'],
+        #'Wen' : ['WH_hbb','TT','Zj_ll','Zj_cj','Zj_bj','Wj_ll','Wj_cj','Wj_bj','WW','WZbb','WZcc','WZqq','ZZbb','ZZcc','ZZqq','ST','QCD'],
+        'Znn' : ['ZH_hbb','ggZH_hbb','TT','TT_Had','Wj_ll','Wj_cj','Wj_bj','Zj_ll','Zj_cj','Zj_bj','ST','WW','WZbb','WZcc','WZqq','ZZbb','ZZcc','ZZqq','QCD']
     }
 
     sig_procs = {
@@ -159,7 +160,7 @@ def createCards():
 
     # Finally, write the cards to disk
     # Combined cars in ./cmb sub-dir
-    writer.WriteCards("cmb",cb)
+    writer.WriteCards("cmb_"+args.channel, cb)
     # Per channel cards, like so:
     for chn in chns:
         writer.WriteCards(chn,cb.cp().channel([chn]))
