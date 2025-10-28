@@ -21,11 +21,10 @@ scramv1 b clean; scramv1 b # always make a clean build
 
 2. Setup the [CombineHarvester](http://cms-analysis.github.io/CombineHarvester/) package:  
 ```
-cmsrel CMSSW_14_1_0_pre4
 cd CMSSW_14_1_0_pre4/src
 cmsenv
 git clone https://github.com/cms-analysis/HiggsAnalysis-CombinedLimit.git HiggsAnalysis/CombinedLimit
-# IMPORTANT: Checkout the recommended tag on the link above
+# IMPORTANT: Checkout the recommended tag on the CombineHarvester home page (link above)
 git clone https://github.com/cms-analysis/CombineHarvester.git CombineHarvester
 git checkout v3.0.0-pre1
 scram b
@@ -59,3 +58,9 @@ combineTool.py -M T2W --cc combined.txt -o ws.root -i output/vhcc_Run3_2022_preE
 ```
 combineTool.py -M AsymptoticLimits -d ws.root --there --run blind
 ```  
+
+
+* All-in-one command:
+```console
+for ch in Zll Wln; do for era in 2022_preEE 2022_postEE 2023_preBPix 2023_postBPix; do echo $ch $era; python3 scripts/vhcc_cards.py -c $ch -y $era; combineTool.py -M T2W --cc combined_${ch}_${era}.txt -o ws_${ch}_${era}.root -i output/vhcc_Run3_$era/cmb_$ch/*.txt; combineTool.py -M AsymptoticLimits -d ws_${ch}_${era}.root --there --run blind > output/limits_${ch}_${era}.log; done; done
+```
