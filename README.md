@@ -206,13 +206,71 @@ combineTool.py -M Impacts -d $CARD/ws_combined_masked_fit.root -m 125 --doFits -
   <img src="img/impact_exp.png" width="400">
 </p>
 
+### Kappa b/c simultaneously scan
 
+**Write the model:**
+Copy the model `model/KBC.py` into the direction `HiggsAnalysis/CombinedLimit/python/`
 
+1. Combine datacards:
 
+Same as written in the Common Usage.
 
+2. Create workspace:
 
+Use the model written in the 1st step
 
+```
+text2workspace.py $CARD/combined_mask.txt -o $CARD/ws_combined_masked.root -m 125 -P HiggsAnalysis.CombinedLimit.KBC:K2C --PO modes=ggH,qqH --channel-masks # optional channel masks
+```
 
+3. Perform 1D kappa scan:
+
+**Kappa Beauty**
+```
+combineTool.py -M MultiDimFit $CARD/ws_combined_masked.root --algo grid --points=200 --setParameters kappa_c=1,kappa_W=1,kappa_Z=1,kappa_tau=1,kappa_t=1 --redefineSignalPOIs kappa_b --setParameterRanges kappa_b=-10,10 -n .KHb -t -1
+
+plot1DScan.py higgsCombine.KHb.MultiDimFit.mH120.root --POI kappa_b --y-max 5 --y-cut 5
+```
+
+**Kappa Charm**
+```
+combineTool.py -M MultiDimFit $CARD/ws_combined_masked.root --algo grid --points=200 --setParameters kappa_b=1,kappa_W=1,kappa_Z=1,kappa_tau=1,kappa_t=1 --redefineSignalPOIs kappa_c --setParameterRanges kappa_c=-40,40 -n .KHc -t -1
+
+plot1DScan.py higgsCombine.KHc.MultiDimFit.mH120.root --POI kappa_c --y-max 5 --y-cut 5
+```
+
+<table>
+  <tr>
+    <td><img src="img/kb_exp.png" width="300"></td>
+    <td><img src="img/kc_exp.png" width="300"></td>
+  </tr>
+</table>
+
+3. Perform 2D kappa scan:
+```
+combineTool.py -M MultiDimFit --mass 125 -n .ZH.kb_kc --algo grid --points 10000 --split-points 1000 -d output_all/2022_ZH_kappa_ws.root --setParameters kappa_b=1,kappa_c=1 --setParameterRanges kappa_b=-8,8:kappa_c=-25,25 -P kappa_b -P kappa_c -t -1 --job-mode condor --sub-opts='+JobFlavour="workday"' &
+```
+
+**visualization:** Then the interactive code `CombinePlot_likelihood.ipynb` can be used to produce the 2D kappa scan plots. (under-dev)
+<p align="center">
+  <img src="img/2D_kappa_exp.png" width="400">
+</p>
+
+3. Perform **kappa_c/kappa_b** scan: (under-dev)
+Temporary solution, implement the following into the datacards:
+```
+r_ZHbb rateParam * ZH_hbb 1 [-8,10]
+R_cb extArg 1 [-10,10]
+r_ZHcc rateParam * ZH_hcc (@0*@0@1) R_cb,r_ZHbb
+```
+
+Then run combine over the new parameter:
+
+```
+combine -M MultiDimFit output_Hcc_ZLL/vhqq_Run3_2022_preEE/R_cb_ws.root --algo grid --points 36 -P R_cb --floatOtherPOIs 1 --setParameterRanges R_cb=-6,6 --robustFit 1 --expectSignal 1 -t -1 --mass 125 -n .scan_R_cb
+
+plot1DScan.py higgsCombine.scan_R_cb.MultiDimFit.mH120.root --POI R_cb --y-max 10 --y-cut 10
+```
 
 
 
