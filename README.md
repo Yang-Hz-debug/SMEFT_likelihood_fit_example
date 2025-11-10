@@ -152,13 +152,73 @@ This gives the signal strength of independent scan of Hbb or Hcc signals.
 
 <table>
   <tr>
-    <td><img src="img/kb_exp.png" width="300"></td>
-    <td><img src="img/kc_exp.png" width="300"></td>
+    <td><img src="img/sb_exp.png" width="300"></td>
+    <td><img src="img/sc_exp.png" width="300"></td>
   </tr>
 </table>
 
+6. 2D Signal Strength Scan: (taking time, recommend to run with Condor)
+```
+combineTool.py -M MultiDimFit --mass 125 -n .hbb_hcc --algo grid --points 10000 --split-points 1000 -d $CARD/ws_combined_masked_fit.root --setParameters r_ZHbb=1,r_ZHcc=1 --setParameterRanges r_ZHbb=-4,4:r_ZHcc=-40,40 -P r_ZHbb -P r_ZHcc -t -1 --job-mode condor --sub-opts='+JobFlavour="longlunch"'
+```
+**visualization:** Then use the `CombinePlot_likelihood.ipynb` for plotting.
 
-6. 
+<p align="center">
+  <img src="img/2D_mu.png" width="400">
+</p>
+
+7. Pre-Post Fit plots:
+```
+combineTool.py -M FitDiagnostics -d $CARD/ws_combined_masked_fit.root -m 125 --saveShapes --saveWithUncertainties --saveNormalizations --setParameters r_ZHcc=1 --redefineSignalPOIs r_ZHbb --setParameterRanges r_ZHbb=-5,5 -t -1 -n .ZHbb &
+
+combineTool.py -M FitDiagnostics -d $CARD/ws_combined_masked_fit.root -m 125 --saveShapes --saveWithUncertainties --saveNormalizations --setParameters r_ZHbb=1 --redefineSignalPOIs r_ZHcc --setParameterRanges r_ZHcc=-20,20 -t -1 -n .ZHcc &
+```
+**visualization:** Then the interactive code `PrePostFit.ipynb` can be used to produce the prefit and postfit plots. (under-dev)
+
+<table>
+  <tr>
+    <td><img src="img/prefit_exp.png" width="300"></td>
+    <td><img src="img/postfit_exp.png" width="300"></td>
+  </tr>
+</table>
+
+8. Goodness of Fit:
+```
+combineTool.py -M GoodnessOfFit $CARD/ws_combined_masked_fit.root --algo saturated -m 125 --freezeParameters MH -n .goodnessOfFit_data
+
+combineTool.py -M GoodnessOfFit datacard_part1_binned.root --algo saturated -m 125 --freezeParameters MH -n .goodnessOfFit_toys -t 1000
+
+combineTool.py -M CollectGoodnessOfFit --input higgsCombine.goodnessOfFit_data.GoodnessOfFit.mH125.root higgsCombine.goodnessOfFit_toys.GoodnessOfFit.mH125.123456.root -m 125.0 -o gof.json
+
+plotGof.py gof.json --statistic saturated --mass 125.0 -o part2_gof
+```
+
+9. Impact plots:
+```
+# initial fit
+combineTool.py -M Impacts -d $CARD/ws_combined_masked_fit.root -m 125 --doInitialFit --robustFit 1 --setParameters r_ZHbb=1,r_ZHcc=1 --redefineSignalPOIs r_ZHbb --setParameterRanges r_ZHbb=-10,10 -t -1 --toysFrequentist --expectSignal 1 --cminDefaultMinimizerStrategy 0 --X-rtd FITTER_DYN_STEP
+
+# Then submit jobs on condor to run many fits as many nuisance are in the fit itself:
+combineTool.py -M Impacts -d $CARD/ws_combined_masked_fit.root -m 125 --doFits --robustFit 1 --setParameters r_ZHbb=1,r_ZHcc=1 --redefineSignalPOIs r_ZHbb --setParameterRanges r_ZHbb=-10,10 -t -1 --toysFrequentist --expectSignal 1 --allPars --cminDefaultMinimizerStrategy 0 --X-rtd MINIMIZER_analytic --job-mode condor --sub-opts='+JobFlavour = "workday"' --task-name VHbb
+```
+
+<p align="center">
+  <img src="img/impact_exp.png" width="400">
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
