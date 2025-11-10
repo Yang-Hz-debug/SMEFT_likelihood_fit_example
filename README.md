@@ -122,7 +122,10 @@ combineTool.py -M CollectLimits $CARD/*.limit.Hcc* --use-dirs -o limits.Hcc.json
 
 Then optionally use the notebook `combinePlot_Era` (or any self-written script) to plot the limits.
 <!-- ![My plot](img/limit_exp.png) -->
-<img src="img/limit_exp.png" alt="limit_exp.png" width="30%">
+<!-- <img src="img/limit_exp.png" alt="limit_exp.png" width="20%"> -->
+<p align="center">
+  <img src="img/limit_exp.png" width="400">
+</p>
 
 4. Significance calculation:
 ```
@@ -144,9 +147,15 @@ plot1DScan.py higgsCombine.muC.MultiDimFit.mH120.root --POI r_ZHcc --y-max 5 --y
 # combineTool.py -M PrintFit --json MultiDimFit_ZHcc.json -P r_ZHcc -i higgsCombine.muC.MultiDimFit.mH120.root --algo singles #optional
 ```
 This gives the signal strength of independent scan of Hbb or Hcc signals.
-<img src="img/kb_exp.png" alt="kb_exp.png" width="30%">
-<img src="img/kc_exp.png" alt="kc_exp.png" width="30%">
+<!-- <img src="img/kb_exp.png" alt="kb_exp.png" width="20%">
+<img src="img/kc_exp.png" alt="kc_exp.png" width="20%"> -->
 
+<table>
+  <tr>
+    <td><img src="img/kb_exp.png" width="300"></td>
+    <td><img src="img/kc_exp.png" width="300"></td>
+  </tr>
+</table>
 
 
 6. 
