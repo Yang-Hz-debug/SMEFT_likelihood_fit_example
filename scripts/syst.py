@@ -27,7 +27,6 @@ def AddCommonSystematics(cb, year=None):
                   (['ZH_hbb','ZH_hcc'], (1.038,0.969))
                   (['WH_hbb','WH_hcc'], (1.005,0.993)))
 
-
   cb.cp().process(['ZH_hcc','WH_hcc','ggZH_hcc']).AddSyst(cb,'BR_hcc', 'lnN', ch.SystMap()((1.05,0.97)))
   cb.cp().process(['ZH_hbb','WH_hbb','ggZH_hbb']).AddSyst(cb,'BR_hbb', 'lnN', ch.SystMap()(1.005))
   # Hbb branching ratio as measured by CMS:
@@ -41,10 +40,10 @@ def AddCommonSystematics(cb, year=None):
                   (['Wen','Wmn'],['WH_hcc','ZH_hcc','WH_hbb','ZH_hbb'],1.02))
 
   # Measured cross section uncertainties because we don't have SF:
-  #cb.cp().process(['VVother','VZcc']).AddSyst(cb,'CMS_vhcc_VV', 'lnN', ch.SystMap()(1.05))
-  cb.cp().process(['s_Top']).AddSyst(cb,'CMS_vhcc_ST', 'lnN', ch.SystMap()(1.15))
-
-  # Uncertainty on di-boson NNLO reweighting
+  cb.cp().process(['ST']).AddSyst(cb,'CMS_vhqq_ST', 'lnN', ch.SystMap()(1.15))
+  cb.cp().process(['WW', 'VZbb', 'VZcc', 'VZlx']).AddSyst(cb,'CMS_vhqq_WW', 'lnN', ch.SystMap()(1.05))
+    
+  # Uncertainty on di-boson NNLO reweighting ??
   #cb.cp().process(['VVother','VZcc']).AddSyst(cb, 'CMS_VV_NNLOWeights_13TeV', 'shape', ch.SystMap()(1.0))
 
   # Theoretical PDF uncertainties
@@ -52,13 +51,15 @@ def AddCommonSystematics(cb, year=None):
   cb.cp().process(['ZH_hbb','ZH_hcc']).AddSyst(cb,'CMS_LHE_pdf_ZH', 'lnN', ch.SystMap()(1.018))
   cb.cp().process(['WH_hbb','WH_hcc']).AddSyst(cb,'CMS_LHE_pdf_WH', 'lnN', ch.SystMap()(1.018))
   cb.cp().process(['TT']).AddSyst(cb,'CMS_LHE_pdf_TT', 'lnN', ch.SystMap()(1.0265))
-  cb.cp().process(['s_Top']).AddSyst(cb,'CMS_LHE_pdf_ST', 'lnN', ch.SystMap()(1.0288))
-  cb.cp().process(['Zj_ll']).AddSyst(cb,'CMS_LHE_pdf_Zj_ll', 'lnN', ch.SystMap()(1.027))
-  cb.cp().process(['Zj_bj']).AddSyst(cb,'CMS_LHE_pdf_Zj_bj', 'lnN', ch.SystMap()(1.027))
-  cb.cp().process(['Zj_cj']).AddSyst(cb,'CMS_LHE_pdf_Zj_cj', 'lnN', ch.SystMap()(1.027))
-  cb.cp().process(['Wj_ll']).AddSyst(cb,'CMS_LHE_pdf_Wj_ll', 'lnN', ch.SystMap()(1.027))
-  cb.cp().process(['Wj_bj']).AddSyst(cb,'CMS_LHE_pdf_Wj_bj', 'lnN', ch.SystMap()(1.027))
-  cb.cp().process(['Wj_cj']).AddSyst(cb,'CMS_LHE_pdf_Wj_cj', 'lnN', ch.SystMap()(1.027))
+  cb.cp().process(['ST']).AddSyst(cb,'CMS_LHE_pdf_ST', 'lnN', ch.SystMap()(1.0288))
+  cb.cp().process(['VJetbx','VJetcx','VJetll']).AddSyst(cb,'CMS_LHE_pdf_VJet', 'lnN', ch.SystMap()(1.027))
+  # cb.cp().process(['Zj_ll']).AddSyst(cb,'CMS_LHE_pdf_Zj_ll', 'lnN', ch.SystMap()(1.027))
+  # cb.cp().process(['Zj_bj']).AddSyst(cb,'CMS_LHE_pdf_Zj_bj', 'lnN', ch.SystMap()(1.027))
+  # cb.cp().process(['Zj_cj']).AddSyst(cb,'CMS_LHE_pdf_Zj_cj', 'lnN', ch.SystMap()(1.027))
+  # cb.cp().process(['VJet']).AddSyst(cb,'CMS_LHE_pdf_VJet', 'lnN', ch.SystMap()(1.027))
+  # cb.cp().process(['Wj_ll']).AddSyst(cb,'CMS_LHE_pdf_Wj_ll', 'lnN', ch.SystMap()(1.027))
+  # cb.cp().process(['Wj_bj']).AddSyst(cb,'CMS_LHE_pdf_Wj_bj', 'lnN', ch.SystMap()(1.027))
+  # cb.cp().process(['Wj_cj']).AddSyst(cb,'CMS_LHE_pdf_Wj_cj', 'lnN', ch.SystMap()(1.027))
   #cb.cp().process(['VZcc']).AddSyst(cb,'CMS_LHE_pdf_VZcc', 'lnN', ch.SystMap()(1.015))
   #cb.cp().process(['VVother']).AddSyst(cb,'CMS_LHE_pdf_VVother', 'lnN', ch.SystMap()(1.0135))
 
@@ -91,8 +92,9 @@ def AddCommonSystematics(cb, year=None):
   ### #cb.cp().process(['VZcc']).AddSyst(cb,'CMS_LHE_weights_scale_muR_VZcc','shape',ch.SystMap()(1.0))
   ### #cb.cp().process(['VVother']).AddSyst(cb,'CMS_LHE_weights_scale_muF_VVother','shape',ch.SystMap()(1.0))
   ### #cb.cp().process(['VZcc']).AddSyst(cb,'CMS_LHE_weights_scale_muF_VZcc','shape',ch.SystMap()(1.0))
+    
+  cb.cp().process(['VJetbx','VJetcx','VJetll']).AddSyst(cb,'nlo_reweight_vjet','shape',ch.SystMap()(1.0))
 
-  # 'JER_AK4PFPuppiDown', 'JER_AK4PFPuppiUp', 'JES_Total_AK4PFPuppiDown', 'JES_Total_AK4PFPuppiUp', 'nominal', 'pileupDown', 'pileupUp', 'sf_ele_idDown', 'sf_ele_idUp', 'sf_ele_recoDown', 'sf_ele_recoUp', 'sf_mu_idDown', 'sf_mu_idUp', 'sf_mu_isoDown', 'sf_mu_isoUp'
   cb.cp().AddSyst(cb,'AK4PFPuppi_JER','shape',ch.SystMap()(1.0))
   cb.cp().AddSyst(cb,'AK4PFPuppi_JES_Total','shape',ch.SystMap()(1.0))
   cb.cp().AddSyst(cb,'pileup','shape',ch.SystMap()(1.0))
@@ -105,68 +107,51 @@ def AddCommonSystematics(cb, year=None):
 
   # TT proc in 2L channel
   cb.cp().channel(['Zee','Zmm']).process(['TT']).AddSyst(cb,
-                                                         'SF_TT_2L_loZPT_'+year, 'rateParam', ch.SystMap('bin_id')
-                                                         ([1,3,5,7,9],  1.0))
-  cb.cp().channel(['Zee','Zmm']).process(['TT']).AddSyst(cb,
-                                                         'SF_TT_2L_hiZPT_'+year, 'rateParam', ch.SystMap('bin_id')
-                                                         ([2,4,6,8,10],  1.0))
-  # Zj_ll in 2L
-  cb.cp().channel(['Zee','Zmm']).process(['Zj_ll']).AddSyst(cb,
-                                                            'SF_Zj_ll_2L_loZPT_'+year, 'rateParam', ch.SystMap('bin_id')
-                                                            ([1,3,5,7,9],  1.0))
-  cb.cp().channel(['Zee','Zmm']).process(['Zj_ll']).AddSyst(cb,
-                                                            'SF_Zj_ll_2L_hiZPT_'+year, 'rateParam', ch.SystMap('bin_id')
-                                                            ([2,4,6,8,10],  1.0))
-  # Zj_bj in 2L
-  cb.cp().channel(['Zee','Zmm']).process(['Zj_bj']).AddSyst(cb,
-                                                            'SF_Zj_bj_2L_loZPT_'+year, 'rateParam', ch.SystMap('bin_id')
-                                                            ([1,3,5,7,9],1.0))
-  cb.cp().channel(['Zee','Zmm']).process(['Zj_bj']).AddSyst(cb,
-                                                            'SF_Zj_bj_2L_hiZPT_'+year, 'rateParam', ch.SystMap('bin_id')
-                                                            ([2,4,6,8,10],1.0))
-  # Zj_cj in 2L
-  cb.cp().channel(['Zee','Zmm']).process(['Zj_cj']).AddSyst(cb,
-                                                            'SF_Zj_cj_2L_loZPT_'+year, 'rateParam', ch.SystMap('bin_id')
-                                                            ([1,3,5,7,9],1.0))
-  cb.cp().channel(['Zee','Zmm']).process(['Zj_cj']).AddSyst(cb,
-                                                            'SF_Zj_cj_2L_hiZPT_'+year, 'rateParam', ch.SystMap('bin_id')
-                                                            ([2,4,6,8,10],1.0))
+                                                         'SF_TT_2L_'+year, 'rateParam', ch.SystMap('bin_id')
+                                                         ([1,2,3,4,5,6,7,8],  1.0))
+  
+  # VJet in 2L
+  cb.cp().channel(['Zee','Zmm']).process(['VJetbx']).AddSyst(cb,
+                                                            'SF_VJet_bx_2L_'+year, 'rateParam', ch.SystMap('bin_id')
+                                                         ([1,2,3,4,5,6,7,8],  1.0))
+  cb.cp().channel(['Zee','Zmm']).process(['VJetcx']).AddSyst(cb,
+                                                            'SF_VJet_cx_2L_'+year, 'rateParam', ch.SystMap('bin_id')
+                                                         ([1,2,3,4,5,6,7,8],  1.0))
+  cb.cp().channel(['Zee','Zmm']).process(['VJetll']).AddSyst(cb,
+                                                            'SF_VJet_ll_2L_'+year, 'rateParam', ch.SystMap('bin_id')
+                                                         ([1,2,3,4,5,6,7,8],  1.0))
 
 
   # TT in 1L channel
   cb.cp().channel(['Wen','Wmn']).process(['TT']).AddSyst(cb,
                                                          'SF_TT_1L_'+year, 'rateParam', ch.SystMap('bin_id')
-                                                         ([1,3,5,7,9],  1.0))
-  # Wj_ll in 1L AND 0L
-  cb.cp().channel(['Wen','Wmn','Znn']).process(['Wj_ll']).AddSyst(cb,
-                                                                  'SF_Wj_ll_1L0L_'+year, 'rateParam', ch.SystMap('bin_id')
-                                                                  ([1,3,5,7,9],  1.0))
-  # Wj_bj in 1L AND 0L
-  cb.cp().channel(['Wen','Wmn','Znn']).process(['Wj_bj']).AddSyst(cb,
-                                                                  'SF_Wj_bj_1L0L_'+year, 'rateParam', ch.SystMap('bin_id')
-                                                                  ([1,3,5,7,9],1.0))
-  # Wj_cj in 1L AND 0L
-  cb.cp().channel(['Wen','Wmn','Znn']).process(['Wj_cj']).AddSyst(cb,
-                                                                  'SF_Wj_cj_1L0L_'+year, 'rateParam', ch.SystMap('bin_id')
-                                                                  ([1,3,5,7,9],1.0))
+                                                         ([1,2,3,4,5,6,7,8],  1.0))
+
+  # VJet in 2L
+  cb.cp().channel(['Wen','Wmn']).process(['VJetbx']).AddSyst(cb,
+                                                            'SF_VJet_bx_1L_'+year, 'rateParam', ch.SystMap('bin_id')
+                                                         ([1,2,3,4,5,6,7,8],  1.0))
+  cb.cp().channel(['Wen','Wmn']).process(['VJetcx']).AddSyst(cb,
+                                                            'SF_VJet_cx_1L_'+year, 'rateParam', ch.SystMap('bin_id')
+                                                         ([1,2,3,4,5,6,7,8],  1.0))
+  cb.cp().channel(['Wen','Wmn']).process(['VJetll']).AddSyst(cb,
+                                                            'SF_VJet_ll_1L_'+year, 'rateParam', ch.SystMap('bin_id')
+                                                         ([1,2,3,4,5,6,7,8],  1.0))
   
-  
-  # TT in 0L channel
+#   # TT in 0L channel
   cb.cp().channel(['Znn']).process(['TT']).AddSyst(cb,
                                                    'SF_TT_0L_'+year, 'rateParam', ch.SystMap('bin_id')
-                                                   ([1,3,5,7,9],  1.0))
-  # Zj_ll in 0L
-  cb.cp().channel(['Znn']).process(['Zj_ll']).AddSyst(cb,
-                                                      'SF_Zj_ll_0L_'+year, 'rateParam', ch.SystMap('bin_id')
-                                                      ([1,3,5,7,9],  1.0))
-  # Zj_bj in 0L
-  cb.cp().channel(['Znn']).process(['Zj_bj']).AddSyst(cb,
-                                                      'SF_Zj_bj_0L_'+year, 'rateParam', ch.SystMap('bin_id')
-                                                      ([1,3,5,7,9],1.0))
-  # Zj_cj in 0L
-  cb.cp().channel(['Znn']).process(['Zj_cj']).AddSyst(cb,
-                                                      'SF_Zj_cj_0L_'+year, 'rateParam', ch.SystMap('bin_id')
-                                                      ([1,3,5,7,9],1.0))
+                                                         ([1,2,3,4,5,6,7,8],  1.0))
+#   # Zj_ll in 0L
+  cb.cp().channel(['Znn']).process(['VJetbx']).AddSyst(cb,
+                                                            'SF_VJet_bx_0L_'+year, 'rateParam', ch.SystMap('bin_id')
+                                                         ([1,2,3,4,5,6,7,8],  1.0))
+  cb.cp().channel(['Znn']).process(['VJetcx']).AddSyst(cb,
+                                                            'SF_VJet_cx_0L_'+year, 'rateParam', ch.SystMap('bin_id')
+                                                         ([1,2,3,4,5,6,7,8],  1.0))
+  cb.cp().channel(['Znn']).process(['VJetll']).AddSyst(cb,
+                                                            'SF_VJet_ll_0L_'+year, 'rateParam', ch.SystMap('bin_id')
+                                                         ([1,2,3,4,5,6,7,8],  1.0))
   
   for syst in cb.cp().syst_type(["rateParam"]).syst_name_set():
     cb.GetParameter(syst).set_range(0.0,5.0)
@@ -179,8 +164,9 @@ def AddCommonSystematics(cb, year=None):
   elif year == '2018':
     cb.cp().process(['Wj_bj']).AddSyst(cb,'Norm_Wj_bj_2018', 'lnN', ch.SystMap()(1.50))
 
-  elif year in ['2022_preEE','2022_postEE','2023_preBPix','2023_postBPix']:
-    cb.cp().process(['Wj_bj']).AddSyst(cb,'Norm_Wj_bj_'+year, 'lnN', ch.SystMap()(1.50))
+  # what does this for???
+  # elif year in ['2022_preEE','2022_postEE','2023_preBPix','2023_postBPix','2024']:
+  #   cb.cp().process(['VJetbx']).AddSyst(cb,'Norm_Vj_bj_'+year, 'lnN', ch.SystMap()(1.50))
 
 
   #========= Lepton efficiencies
