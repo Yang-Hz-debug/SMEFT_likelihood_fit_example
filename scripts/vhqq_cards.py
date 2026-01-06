@@ -151,8 +151,8 @@ def createCards():
     ch.SetStandardBinNames(cb)
 
 
-    writer=ch.CardWriter("output_Hbb/" + args.output_folder + "_" + year + "/$TAG/$BIN_"+year+".txt",
-                         "output_Hbb/" + args.output_folder + "_" + year +"/$TAG/shapes/shapes_$BIN_"+year+".root")
+    writer=ch.CardWriter("output_Hqq/" + args.output_folder + "_" + year + "/$TAG/$BIN_"+year+".txt",
+                         "output_Hqq/" + args.output_folder + "_" + year +"/$TAG/shapes/shapes_$BIN_"+year+".root")
 
 
 
