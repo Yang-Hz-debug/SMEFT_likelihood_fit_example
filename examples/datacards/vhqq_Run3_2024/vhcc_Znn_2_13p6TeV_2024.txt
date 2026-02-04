@@ -1,0 +1,42 @@
+imax    1 number of bins
+jmax    12 number of processes minus 1
+kmax    * number of nuisance parameters
+--------------------------------------------------------------------------------
+shapes * vhcc_Znn_2_13p6TeV shapes/shapes_vhcc_Znn_2_13p6TeV_2024.root vhcc_Znn_2_13p6TeV/$PROCESS vhcc_Znn_2_13p6TeV/$PROCESS_$SYSTEMATIC
+--------------------------------------------------------------------------------
+bin          vhcc_Znn_2_13p6TeV 
+observation  7433.0          
+--------------------------------------------------------------------------------
+bin                          vhcc_Znn_2_13p6TeV vhcc_Znn_2_13p6TeV vhcc_Znn_2_13p6TeV vhcc_Znn_2_13p6TeV vhcc_Znn_2_13p6TeV vhcc_Znn_2_13p6TeV vhcc_Znn_2_13p6TeV vhcc_Znn_2_13p6TeV vhcc_Znn_2_13p6TeV vhcc_Znn_2_13p6TeV vhcc_Znn_2_13p6TeV vhcc_Znn_2_13p6TeV vhcc_Znn_2_13p6TeV 
+process                      ZH_hcc          ZH_hbb          ggZH_hbb        ggZH_hcc        TT              VJetbx          VJetcx          VJetll          WW              VZbb            VZcc            VZlx            ST              
+process                      -3              -2              -1              0               1               2               3               4               5               6               7               8               9               
+rate                         0.0296552       333.135         39.1017         0.00684924      2184.84         2677.86         46.6699         13.4134         2.1781          0.258701        90.7617         0.289791        544.694         
+--------------------------------------------------------------------------------
+AK4PFPuppi_JER       shape   1               1               1               1               1               1               1               1               1               1               1               1               1               
+AK4PFPuppi_JES_Total shape   1               1               1               1               1               1               1               1               1               1               1               1               1               
+BR_hbb               lnN     -               1.005           1.005           -               -               -               -               -               -               -               -               -               -               
+BR_hcc               lnN     1.05/0.97       -               -               1.05/0.97       -               -               -               -               -               -               -               -               -               
+CMS_LHE_pdf_ST       lnN     -               -               -               -               -               -               -               -               -               -               -               -               1.0288          
+CMS_LHE_pdf_TT       lnN     -               -               -               -               1.0265          -               -               -               -               -               -               -               -               
+CMS_LHE_pdf_VJet     lnN     -               -               -               -               -               1.027           1.027           1.027           -               -               -               -               -               
+CMS_LHE_pdf_ZH       lnN     1.018           1.018           -               -               -               -               -               -               -               -               -               -               -               
+CMS_LHE_pdf_ggZH     lnN     -               -               1.023           1.023           -               -               -               -               -               -               -               -               -               
+CMS_vhcc_boost_EWK   lnN     1.02            1.02            1.02            1.02            -               -               -               -               -               -               -               -               -               
+CMS_vhqq_ST          lnN     -               -               -               -               -               -               -               -               -               -               -               -               1.15            
+CMS_vhqq_WW          lnN     -               -               -               -               -               -               -               -               1.05            1.05            1.05            1.05            -               
+QCDscale_VH          lnN     1.038/0.969     1.038/0.969     -               -               -               -               -               -               -               -               -               -               -               
+QCDscale_ggZH        lnN     -               -               1.251/0.811     1.251/0.811     -               -               -               -               -               -               -               -               -               
+lumi_13p6TeV         lnN     1.01            1.01            1.01            1.01            1.01            1.01            1.01            1.01            1.01            1.01            1.01            1.01            1.01            
+nlo_reweight_vjet    shape   -               -               -               -               -               1               1               1               -               -               -               -               -               
+pdf_Higgs_gg         lnN     -               -               1.024           1.024           -               -               -               -               -               -               -               -               -               
+pdf_Higgs_qqbar      lnN     1.016           1.016           -               -               -               -               -               -               -               -               -               -               -               
+pileup               shape   1               1               1               1               1               1               1               1               1               1               1               1               1               
+sf_ele_id            shape   1               1               1               1               1               1               1               1               1               1               1               1               1               
+sf_ele_reco          shape   1               1               1               1               1               1               1               1               1               1               1               1               1               
+sf_mu_id             shape   1               1               1               1               1               1               1               1               1               1               1               1               1               
+sf_mu_iso            shape   1               1               1               1               1               1               1               1               1               1               1               1               1               
+SF_TT_0L_2024        rateParam  *          TT         1 [0,5]
+SF_VJet_bx_0L_2024   rateParam  *          VJetbx     1 [0,5]
+SF_VJet_cx_0L_2024   rateParam  *          VJetcx     1 [0,5]
+SF_VJet_ll_0L_2024   rateParam  *          VJetll     1 [0,5]
+* autoMCStats 0

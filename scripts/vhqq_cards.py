@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import CombineHarvester.CombineTools.ch as ch
-import syst_test as systs
+import syst as systs
 
 import ROOT as R
 import glob
@@ -63,62 +63,59 @@ def createCards():
         chns.append('Znn')
     
     year = args.year
-    if year not in ["2016","2017","2018",'2022_preEE','2022_postEE','2023_preBPix','2023_postBPix']:
+    if year not in ["2016","2017","2018",'2022_preEE','2022_postEE','2023_preBPix','2023_postBPix','2024']:
         print("Year ", year, " not supported!")
         sys.exit()
 
     bkg_procs = {
-        #'Zmm' : ['ZH_hbb','ggZH_hbb','s_Top','TT','Zj_ll','Zj_bj','Zj_cj','VVother','VZcc'],
-        'Zmm' : ['TT','VJetbx','VJetcx','VJetll','WW','WZ_bb','WZ_cc','WZ_lx','ZZ_bb','ZZ_cc','ZZ_lx','ST'],
-        'Zee' : ['TT','VJetbx','VJetcx','VJetll','WW','WZ_bb','WZ_cc','WZ_lx','ZZ_bb','ZZ_cc','ZZ_lx','ST'],
-        'Wmn' : ['TT','VJetbx','VJetcx','VJetll','WW','WZ_bb','WZ_cc','WZ_lx','ZZ_bb','ZZ_cc','ZZ_lx','ST'],
-        'Wen' : ['TT','VJetbx','VJetcx','VJetll','WW','WZ_bb','WZ_cc','WZ_lx','ZZ_bb','ZZ_cc','ZZ_lx','ST'],
-        'Znn' : ['TT','VJetbx','VJetcx','VJetll','WW','WZ_bb','WZ_cc','WZ_lx','ZZ_bb','ZZ_cc','ZZ_lx','ST'],
+        'Zmm' : ['TT','VJetbx','VJetcx','VJetll','WW', 'VZbb', 'VZcc', 'VZlx', 'ST','QCD'],
+        'Zee' : ['TT','VJetbx','VJetcx','VJetll','WW', 'VZbb', 'VZcc', 'VZlx', 'ST','QCD'],
+        'Wmn' : ['TT','VJetbx','VJetcx','VJetll','WW', 'VZbb', 'VZcc', 'VZlx', 'ST','QCD'],
+        'Wen' : ['TT','VJetbx','VJetcx','VJetll','WW', 'VZbb', 'VZcc', 'VZlx', 'ST','QCD'],
+        'Znn' : ['TT','VJetbx','VJetcx','VJetll','WW', 'VZbb', 'VZcc', 'VZlx', 'ST','QCD'],
     }
 
     sig_procs = {
-        # 'Zmm' : ['ZH_hcc', 'ZH_hbb', 'ggZH_hbb', 'ggZH_hcc'],
-        # 'Zee' : ['ZH_hcc', 'ZH_hbb', 'ggZH_hbb', 'ggZH_hcc'],
-        'Zmm' : ['ZH_hbb'],
-        'Zee' : ['ZH_hbb'],
+        'Zmm' : ['ZH_hcc', 'ZH_hbb', 'ggZH_hbb', 'ggZH_hcc'],
+        'Zee' : ['ZH_hcc', 'ZH_hbb', 'ggZH_hbb', 'ggZH_hcc'],
         'Wmn' : ['WH_hcc','WH_hbb'],
         'Wen' : ['WH_hcc','WH_hbb'],
         'Znn' : ['ZH_hcc', 'ZH_hbb', 'ggZH_hbb', 'ggZH_hcc'],
     }
 
     cats = {
-        'Zmm' : [
-            (1, 'SR_Zmm_2J_cJ_loZPT'), (2, 'SR_Zmm_2J_cJ_hiZPT'), 
-            (3, 'CR_Zmm_HF_loZPT'), (4, 'CR_Zmm_HF_hiZPT'), 
-            (5, 'CR_Zmm_B_loZPT'), (6, 'CR_Zmm_B_hiZPT'), 
-            (7, 'CR_Zmm_4J_TT_loZPT'), (8, 'CR_Zmm_4J_TT_hiZPT'),
-            (9, 'CR_Zmm_2J_CC_loZPT'), (10, 'CR_Zmm_2J_CC_hiZPT'),
-            (11, 'SR_Zmm_BB'),
-            (12, 'CR_Zmm_LF'), 
-            (13, 'CR_Zmm_BB')        ],
         'Zee' : [
-            (1, 'SR_Zee_2J_cJ_loZPT'), (2, 'SR_Zee_2J_cJ_hiZPT'), 
-            (3, 'CR_Zee_HF_loZPT'), (4, 'CR_Zee_HF_hiZPT'), 
-            (5, 'CR_Zee_B_loZPT'), (6, 'CR_Zee_B_hiZPT'), 
-            (7, 'CR_Zee_4J_TT_loZPT'), (8, 'CR_Zee_4J_TT_hiZPT'),
-            (9, 'CR_Zee_2J_CC_loZPT'), (10, 'CR_Zee_2J_CC_hiZPT'),
-            (11, 'SR_Zee_BB'),
-            (12, 'CR_Zee_LF'), 
-            (13, 'CR_Zee_BB')        ],
-        
+            (1, 'SR_Zee_2J_cJ'), (2, 'SR_Zee_BB'), 
+            (3, 'CR_Zee_B'), (4, 'CR_Zee_LF'), 
+            (5, 'CR_Zee_HF'), (6, 'CR_Zee_4J_TT'), 
+            (7, 'CR_Zee_BB'), (8, 'CR_Zee_2J_CC')
+        ],
+        'Zmm' : [
+            (1, 'SR_Zmm_2J_cJ'), (2, 'SR_Zmm_BB'), 
+            (3, 'CR_Zmm_B'), (4, 'CR_Zmm_LF'), 
+            (5, 'CR_Zmm_HF'), (6, 'CR_Zmm_4J_TT'), 
+            (7, 'CR_Zmm_BB'), (8, 'CR_Zmm_2J_CC')
+        ],
         'Wen' : [
-            (1, 'SR_Wen_2J_cJ'), (2, 'SR_Wen_BB'), (3, 'CR_Wen_B'), (4, 'CR_Wen_HF'),
-            (5, 'CR_Wen_LF'), (6, 'CR_Wen_4J_TT'), (7, 'CR_Wen_BB'), (8, 'CR_Wen_2J_CC')
+            (1, 'SR_Wen_2J_cJ'), (2, 'SR_Wen_BB'), 
+            (3, 'CR_Wen_B'), (4, 'CR_Wen_HF'),
+            (5, 'CR_Wen_HF'), (6, 'CR_Wen_4J_TT'), 
+            (7, 'CR_Wen_BB'), (8, 'CR_Wen_2J_CC')
         ],
         'Wmn' : [
-            (1, 'SR_Wmn_2J_cJ'), (2, 'SR_Wmn_BB'), (3, 'CR_Wmn_B'), (4, 'CR_Wmn_HF'),
-            (5, 'CR_Wmn_LF'), (6, 'CR_Wmn_4J_TT'), (7, 'CR_Wmn_BB'), (8, 'CR_Wmn_2J_CC')
+            (1, 'SR_Wmn_2J_cJ'), (2, 'SR_Wmn_BB'), 
+            (3, 'CR_Wmn_B'), (4, 'CR_Wmn_HF'),
+            (5, 'CR_Wmn_LF'), (6, 'CR_Wmn_4J_TT'), 
+            (7, 'CR_Wmn_BB'), (8, 'CR_Wmn_2J_CC')
         ],
         'Znn' : [
-            (1, 'SR_Znn_2J_cJ'), (2, 'SR_Znn_BB'), (3, 'CR_Znn_B'), (4,'CR_Znn_HF'), 
-            (5, 'CR_Znn_LF'), (6, 'CR_Znn_4J_TT'), (7, 'CR_Znn_BB'), (8, 'CR_Znn_2J_CC')
+            (1, 'SR_Znn_2J_cJ'), (2, 'SR_Znn_BB'), 
+            (3, 'CR_Znn_B'), (4,'CR_Znn_HF'), 
+            (5, 'CR_Znn_LF'), (6, 'CR_Znn_4J_TT'), 
+            (7, 'CR_Znn_BB'), (8, 'CR_Znn_2J_CC')
         ],
     }
+
     for chn in chns:
         cb.AddObservations( ['*'], ['vhcc'], ['13p6TeV'], [chn], cats[chn])
         cb.AddProcesses( ['*'], ['vhcc'], ['13p6TeV'], [chn], sig_procs[chn], cats[chn], True)
@@ -134,16 +131,16 @@ def createCards():
 
     for chn in chns:
         if chn in ['Zll','Zmm','Zee']:
-            input_root_file = "./vhbb_shapes_"+year+"_2L.root"
+            input_root_file = "./vhqq_shapes_"+year+"_2L.root"
         elif chn in ['Wln','Wmn','Wen']:
-            input_root_file = "./vhbb_shapes_"+year+"_1L.root"
+            input_root_file = "./vhqq_shapes_"+year+"_1L.root"
         elif chn in ['Znn']:
-            input_root_file = "./vhbb_shapes_"+year+"_0L.root"
+            input_root_file = "./vhqq_shapes_"+year+"_0L.root"
 
-        cb.cp().channel([chn]).signals().bin_id([1,2,3,4,5,6,7,8,9,10]).ExtractShapes(
+        cb.cp().channel([chn]).signals().bin_id([1,2,3,4,5,6,7,8,9,10,11,12,13]).ExtractShapes(
             # input_root_file, year+'_$BIN/$PROCESS_nominal', 'Shape_$BIN_$PROCESS_$SYSTEMATIC')
             input_root_file, year+'_$BIN/$PROCESS_nominal', year+'_$BIN/$PROCESS_$SYSTEMATIC')
-        cb.cp().channel([chn]).backgrounds().bin_id([1,2,3,4,5,6,7,8,9,10]).ExtractShapes(
+        cb.cp().channel([chn]).backgrounds().bin_id([1,2,3,4,5,6,7,8,9,10,11,12,13]).ExtractShapes(
             # input_root_file, year+'_$BIN/$PROCESS_nominal', 'Shape_$BIN_$PROCESS_$SYSTEMATIC')
             input_root_file, year+'_$BIN/$PROCESS_nominal', year+'_$BIN/$PROCESS_$SYSTEMATIC')
 
@@ -154,8 +151,8 @@ def createCards():
     ch.SetStandardBinNames(cb)
 
 
-    writer=ch.CardWriter("output_Hbb/" + args.output_folder + "_" + year + "/$TAG/$BIN_"+year+".txt",
-                         "output_Hbb/" + args.output_folder + "_" + year +"/$TAG/shapes/shapes_$BIN_"+year+".root")
+    writer=ch.CardWriter("output_Hqq/" + args.output_folder + "_" + year + "/$TAG/$BIN_"+year+".txt",
+                         "output_Hqq/" + args.output_folder + "_" + year +"/$TAG/shapes/shapes_$BIN_"+year+".root")
 
 
 
