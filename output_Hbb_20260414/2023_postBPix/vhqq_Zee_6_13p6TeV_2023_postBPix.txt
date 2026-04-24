@@ -1,0 +1,34 @@
+imax    1 number of bins
+jmax    8 number of processes minus 1
+kmax    * number of nuisance parameters
+--------------------------------------------------------------------------------
+shapes * vhqq_Zee_6_13p6TeV shapes/shapes_vhqq_Zee_6_13p6TeV_2023_postBPix.root vhqq_Zee_6_13p6TeV/$PROCESS vhqq_Zee_6_13p6TeV/$PROCESS_$SYSTEMATIC
+--------------------------------------------------------------------------------
+bin          vhqq_Zee_6_13p6TeV 
+observation  1.0             
+--------------------------------------------------------------------------------
+bin                                                 vhqq_Zee_6_13p6TeV vhqq_Zee_6_13p6TeV vhqq_Zee_6_13p6TeV vhqq_Zee_6_13p6TeV vhqq_Zee_6_13p6TeV vhqq_Zee_6_13p6TeV vhqq_Zee_6_13p6TeV vhqq_Zee_6_13p6TeV vhqq_Zee_6_13p6TeV 
+process                                             ZH_hbb_pTH_60_120 ZH_hbb_pTH_120_200 ZH_hbb_pTH_200_300 ZH_hbb_pTH_300_450 ZH_hbb_pTH_450_inf TT              VJetcx          VZbb            VZlx            
+process                                             -4                -3                 -2                 -1                 0                  1               2               3               4               
+rate                                                0.000214586       6.63245e-05        0.000100449        0.0111362          0.0611004          0.0427958       2.49168         0.0812847       0.00903808      
+--------------------------------------------------------------------------------
+AK4PFPuppi_JER                              shape   1                 1                  1                  1                  1                  1               1               1               1               
+AK4PFPuppi_JES_Total                        shape   1                 1                  1                  1                  1                  1               1               1               1               
+CMS_LHE_pdf_TT                              lnN     -                 -                  -                  -                  -                  1.0265          -               -               -               
+CMS_LHE_pdf_VJet                            lnN     -                 -                  -                  -                  -                  -               1.027           -               -               
+CMS_vhbb_eff_e_Zll_13p6TeV_2023_postBPix    lnN     1.04              1.04               1.04               1.04               1.04               1.04            1.04            1.04            1.04            
+CMS_vhqq_WW                                 lnN     -                 -                  -                  -                  -                  -               -               1.05            1.05            
+lumi_13p6TeV                                lnN     1.01              1.01               1.01               1.01               1.01               1.01            1.01            1.01            1.01            
+pileup                                      shape   1                 1                  1                  1                  1                  1               1               1               1               
+sf_btag_cferr1_Correlated                   shape   1                 1                  1                  1                  1                  1               1               1               1               
+sf_btag_cferr2_Correlated                   shape   1                 1                  1                  1                  1                  1               1               1               1               
+sf_btag_hf_Correlated                       shape   1                 1                  1                  1                  1                  1               1               1               1               
+sf_btag_hfstats1_Uncorrelated_2023_postBPix shape   1                 1                  1                  1                  1                  1               1               1               1               
+sf_btag_hfstats2_Uncorrelated_2023_postBPix shape   1                 1                  1                  1                  1                  1               1               1               1               
+sf_btag_lf_Correlated                       shape   1                 1                  1                  1                  1                  1               1               1               1               
+sf_btag_lfstats1_Uncorrelated_2023_postBPix shape   1                 1                  1                  1                  1                  1               1               1               1               
+sf_btag_lfstats2_Uncorrelated_2023_postBPix shape   1                 1                  1                  1                  1                  1               1               1               1               
+sf_ele_id                                   shape   1                 1                  1                  1                  1                  1               1               1               1               
+sf_ele_reco                                 shape   1                 1                  1                  1                  1                  1               1               1               1               
+SF_TT_2L_2023_postBPix                      rateParam  *          TT         1 [0,5]
+* autoMCStats 0

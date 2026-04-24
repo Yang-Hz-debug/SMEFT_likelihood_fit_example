@@ -1,0 +1,38 @@
+imax    1 number of bins
+jmax    12 number of processes minus 1
+kmax    * number of nuisance parameters
+--------------------------------------------------------------------------------
+shapes * vhqq_Zee_2_13p6TeV shapes/shapes_vhqq_Zee_2_13p6TeV_2022_preEE.root vhqq_Zee_2_13p6TeV/$PROCESS vhqq_Zee_2_13p6TeV/$PROCESS_$SYSTEMATIC
+--------------------------------------------------------------------------------
+bin          vhqq_Zee_2_13p6TeV 
+observation  501.0           
+--------------------------------------------------------------------------------
+bin                                              vhqq_Zee_2_13p6TeV vhqq_Zee_2_13p6TeV vhqq_Zee_2_13p6TeV vhqq_Zee_2_13p6TeV vhqq_Zee_2_13p6TeV vhqq_Zee_2_13p6TeV vhqq_Zee_2_13p6TeV vhqq_Zee_2_13p6TeV vhqq_Zee_2_13p6TeV vhqq_Zee_2_13p6TeV vhqq_Zee_2_13p6TeV vhqq_Zee_2_13p6TeV vhqq_Zee_2_13p6TeV 
+process                                          ZH_hbb_pTH_0_60 ZH_hbb_pTH_60_120 ZH_hbb_pTH_120_200 ZH_hbb_pTH_200_300 ZH_hbb_pTH_300_450 TT              VJetbx          VJetcx          VJetll          VZbb            VZcc            VZlx            ST              
+process                                          -4              -3                -2                 -1                 0                  1               2               3               4               5               6               7               8               
+rate                                             0.171713        1.98831           0.477057           0.00371682         0.00073181         291.174         191.494         9.1959          13.903          6.55921         0.301096        0.468716        30.3628         
+--------------------------------------------------------------------------------
+AK4PFPuppi_JER                           shape   1               1                 1                  1                  1                  1               1               1               1               1               1               1               1               
+AK4PFPuppi_JES_Total                     shape   1               1                 1                  1                  1                  1               1               1               1               1               1               1               1               
+CMS_LHE_pdf_ST                           lnN     -               -                 -                  -                  -                  -               -               -               -               -               -               -               1.0288          
+CMS_LHE_pdf_TT                           lnN     -               -                 -                  -                  -                  1.0265          -               -               -               -               -               -               -               
+CMS_LHE_pdf_VJet                         lnN     -               -                 -                  -                  -                  -               1.027           1.027           1.027           -               -               -               -               
+CMS_vhbb_eff_e_Zll_13p6TeV_2022_preEE    lnN     1.04            1.04              1.04               1.04               1.04               1.04            1.04            1.04            1.04            1.04            1.04            1.04            1.04            
+CMS_vhqq_ST                              lnN     -               -                 -                  -                  -                  -               -               -               -               -               -               -               1.15            
+CMS_vhqq_WW                              lnN     -               -                 -                  -                  -                  -               -               -               -               1.05            1.05            1.05            -               
+lumi_13p6TeV                             lnN     1.01            1.01              1.01               1.01               1.01               1.01            1.01            1.01            1.01            1.01            1.01            1.01            1.01            
+pileup                                   shape   1               1                 1                  1                  1                  1               1               1               1               1               1               1               1               
+sf_btag_cferr1_Correlated                shape   1               1                 1                  1                  1                  1               1               1               1               1               1               1               1               
+sf_btag_cferr2_Correlated                shape   1               1                 1                  1                  1                  1               1               1               1               1               1               1               1               
+sf_btag_hf_Correlated                    shape   1               1                 1                  1                  1                  1               1               1               1               1               1               1               1               
+sf_btag_hfstats1_Uncorrelated_2022_preEE shape   1               1                 1                  1                  1                  1               1               1               1               1               1               1               1               
+sf_btag_hfstats2_Uncorrelated_2022_preEE shape   1               1                 1                  1                  1                  1               1               1               1               1               1               1               1               
+sf_btag_lf_Correlated                    shape   1               1                 1                  1                  1                  1               1               1               1               1               1               1               1               
+sf_btag_lfstats1_Uncorrelated_2022_preEE shape   1               1                 1                  1                  1                  1               1               1               1               1               1               1               1               
+sf_btag_lfstats2_Uncorrelated_2022_preEE shape   1               1                 1                  1                  1                  1               1               1               1               1               1               1               1               
+sf_ele_id                                shape   1               1                 1                  1                  1                  1               1               1               1               1               1               1               1               
+sf_ele_reco                              shape   1               1                 1                  1                  1                  1               1               1               1               1               1               1               1               
+SF_TT_2L_2022_preEE                      rateParam  *          TT         1 [0,5]
+SF_VJet_bx_2L_2022_preEE                 rateParam  *          VJetbx     1 [0,5]
+SF_VJet_ll_2L_2022_preEE                 rateParam  *          VJetll     1 [0,5]
+* autoMCStats 0

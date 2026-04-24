@@ -1,0 +1,30 @@
+imax    1 number of bins
+jmax    12 number of processes minus 1
+kmax    * number of nuisance parameters
+--------------------------------------------------------------------------------
+shapes * vhqq_Zee_1_13p6TeV shapes/shapes_vhqq_Zee_1_13p6TeV_2024.root vhqq_Zee_1_13p6TeV/$PROCESS vhqq_Zee_1_13p6TeV/$PROCESS_$SYSTEMATIC
+--------------------------------------------------------------------------------
+bin          vhqq_Zee_1_13p6TeV 
+observation  8053.0          
+--------------------------------------------------------------------------------
+bin                                     vhqq_Zee_1_13p6TeV vhqq_Zee_1_13p6TeV vhqq_Zee_1_13p6TeV vhqq_Zee_1_13p6TeV vhqq_Zee_1_13p6TeV vhqq_Zee_1_13p6TeV vhqq_Zee_1_13p6TeV vhqq_Zee_1_13p6TeV vhqq_Zee_1_13p6TeV vhqq_Zee_1_13p6TeV vhqq_Zee_1_13p6TeV vhqq_Zee_1_13p6TeV vhqq_Zee_1_13p6TeV 
+process                                 ZH_hbb_pTH_0_60 ZH_hbb_pTH_60_120 ZH_hbb_pTH_120_200 ZH_hbb_pTH_200_300 TT              VJetbx          VJetcx          VJetll          WW              VZbb            VZcc            VZlx            ST              
+process                                 -3              -2                -1                 0                  1               2               3               4               5               6               7               8               9               
+rate                                    24.6799         4.87781           0.093441           0.0287249          2722.3          5200.37         110.897         331.195         0.0725905       57.3564         1.14902         2.77664         646.988         
+--------------------------------------------------------------------------------
+AK4PFPuppi_JER                  shape   1               1                 1                  1                  1               1               1               1               1               1               1               1               1               
+AK4PFPuppi_JES_Total            shape   1               1                 1                  1                  1               1               1               1               -               1               1               1               1               
+CMS_LHE_pdf_ST                  lnN     -               -                 -                  -                  -               -               -               -               -               -               -               -               1.0288          
+CMS_LHE_pdf_TT                  lnN     -               -                 -                  -                  1.0265          -               -               -               -               -               -               -               -               
+CMS_LHE_pdf_VJet                lnN     -               -                 -                  -                  -               1.027           1.027           1.027           -               -               -               -               -               
+CMS_vhbb_eff_e_Zll_13p6TeV_2024 lnN     1.04            1.04              1.04               1.04               1.04            1.04            1.04            1.04            1.04            1.04            1.04            1.04            1.04            
+CMS_vhqq_ST                     lnN     -               -                 -                  -                  -               -               -               -               -               -               -               -               1.15            
+CMS_vhqq_WW                     lnN     -               -                 -                  -                  -               -               -               -               1.05            1.05            1.05            1.05            -               
+lumi_13p6TeV                    lnN     1.01            1.01              1.01               1.01               1.01            1.01            1.01            1.01            1.01            1.01            1.01            1.01            1.01            
+pileup                          shape   1               1                 1                  1                  1               1               1               1               1               1               1               1               1               
+sf_ele_id                       shape   1               1                 1                  1                  1               1               1               1               1               1               1               1               1               
+sf_ele_reco                     shape   1               1                 1                  1                  1               1               1               1               1               1               1               1               1               
+SF_TT_2L_2024                   rateParam  *          TT         1 [0,5]
+SF_VJet_bx_2L_2024              rateParam  *          VJetbx     1 [0,5]
+SF_VJet_ll_2L_2024              rateParam  *          VJetll     1 [0,5]
+* autoMCStats 0
