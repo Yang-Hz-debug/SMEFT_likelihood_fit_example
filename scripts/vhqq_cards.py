@@ -45,84 +45,82 @@ def drop_zero_systs(syst):
 
 def createCards():
     cb = ch.CombineHarvester()
-
-    chns = []
-    if args.channel=="all":
-        # At the moment only 2L channels are supported:
-        chns = ['Zee','Zmm','Znn']
-        #chns = ['Wen','Wmn','Znn','Zee','Zmm']
-    if 'Zll' in args.channel or 'Zmm' in args.channel:
-        chns.append('Zmm')
-    if 'Zll' in args.channel or 'Zee' in args.channel:
-        chns.append('Zee')
-    if 'Wln' in args.channel or 'Wmn' in args.channel:
-        chns.append('Wmn')
-    if 'Wln' in args.channel or 'Wen' in args.channel:
-        chns.append('Wen')
-    if 'Znn' in args.channel:
-        chns.append('Znn')
+    
+    # Define your channels
+    chns = ['Zee']  # Add other channels as needed
+                    #, 'Zmm'
     
     year = args.year
-    if year not in ["2016","2017","2018",'2022_preEE','2022_postEE','2023_preBPix','2023_postBPix','2024']:
-        print("Year ", year, " not supported!")
-        sys.exit()
-
+    
+    # 定义背景过程
     bkg_procs = {
-        'Zmm' : ['TT','VJetbx','VJetcx','VJetll','WW', 'VZbb', 'VZcc', 'VZlx', 'ST','QCD'],
-        'Zee' : ['TT','VJetbx','VJetcx','VJetll','WW', 'VZbb', 'VZcc', 'VZlx', 'ST','QCD'],
-        'Wmn' : ['TT','VJetbx','VJetcx','VJetll','WW', 'VZbb', 'VZcc', 'VZlx', 'ST','QCD'],
-        'Wen' : ['TT','VJetbx','VJetcx','VJetll','WW', 'VZbb', 'VZcc', 'VZlx', 'ST','QCD'],
-        'Znn' : ['TT','VJetbx','VJetcx','VJetll','WW', 'VZbb', 'VZcc', 'VZlx', 'ST','QCD'],
+        'Zee': ['VZbb', 'VZcc', 'VZlx', 'WW', 'TT', 'ST', 'VJetbx', 'VJetcx', 'VJetll'],
     }
-
+    
+    # 定义信号过程
     sig_procs = {
-        'Zmm' : ['ZH_hcc', 'ZH_hbb', 'ggZH_hbb', 'ggZH_hcc'],
-        'Zee' : ['ZH_hcc', 'ZH_hbb', 'ggZH_hbb', 'ggZH_hcc'],
-        'Wmn' : ['WH_hcc','WH_hbb'],
-        'Wen' : ['WH_hcc','WH_hbb'],
-        'Znn' : ['ZH_hcc', 'ZH_hbb', 'ggZH_hbb', 'ggZH_hcc'],
+        'Zee': ['ZH_hbb', 'ggZH_hbb'],
     }
-
+    
+    # Define your categories with bin IDs
     cats = {
-        'Zee' : [
-            (1, 'SR_Zee_2J_cJ'), (2, 'SR_Zee_BB'), 
-            (3, 'CR_Zee_B'), (4, 'CR_Zee_LF'), 
-            (5, 'CR_Zee_HF'), (6, 'CR_Zee_4J_TT'), 
-            (7, 'CR_Zee_BB'), (8, 'CR_Zee_2J_CC')
+        ######## for any year
+        'Zee': [
+            # CR区域（按pt分bin）
+            (1, 'CR_Zee_BB_pt0_60'),
+            (2, 'CR_Zee_BB_pt60_120'),
+            (3, 'CR_Zee_BB_pt120_200'),
+            (4, 'CR_Zee_BB_pt200_300'),
+            (5, 'CR_Zee_BB_pt300_450'),
+            (6, 'CR_Zee_BB_pt450_inf'),
+
+            # SR区域（按pt分bin）
+            (7, 'SR_Zee_BB_pt0_60'),
+            (8, 'SR_Zee_BB_pt60_120'),
+            (9, 'SR_Zee_BB_pt120_200'),
+            (10, 'SR_Zee_BB_pt200_300'),
+            (11, 'SR_Zee_BB_pt300_450'),
+            (12, 'SR_Zee_BB_pt450_inf'),
+
+            # inclusive bins
+            (13, 'CR_Zee_BB'),      # inclusive CR bin
+            (14, 'SR_Zee_BB'),      # inclusive SR bin
+            (15, 'CR_Zee_BB_GNN'),      # inclusive CR bin
+            (16, 'SR_Zee_BB_GNN'),      # inclusive SR bin
         ],
-        'Zmm' : [
-            (1, 'SR_Zmm_2J_cJ'), (2, 'SR_Zmm_BB'), 
-            (3, 'CR_Zmm_B'), (4, 'CR_Zmm_LF'), 
-            (5, 'CR_Zmm_HF'), (6, 'CR_Zmm_4J_TT'), 
-            (7, 'CR_Zmm_BB'), (8, 'CR_Zmm_2J_CC')
-        ],
-        'Wen' : [
-            (1, 'SR_Wen_2J_cJ'), (2, 'SR_Wen_BB'), 
-            (3, 'CR_Wen_B'), (4, 'CR_Wen_HF'),
-            (5, 'CR_Wen_HF'), (6, 'CR_Wen_4J_TT'), 
-            (7, 'CR_Wen_BB'), (8, 'CR_Wen_2J_CC')
-        ],
-        'Wmn' : [
-            (1, 'SR_Wmn_2J_cJ'), (2, 'SR_Wmn_BB'), 
-            (3, 'CR_Wmn_B'), (4, 'CR_Wmn_HF'),
-            (5, 'CR_Wmn_LF'), (6, 'CR_Wmn_4J_TT'), 
-            (7, 'CR_Wmn_BB'), (8, 'CR_Wmn_2J_CC')
-        ],
-        'Znn' : [
-            (1, 'SR_Znn_2J_cJ'), (2, 'SR_Znn_BB'), 
-            (3, 'CR_Znn_B'), (4,'CR_Znn_HF'), 
-            (5, 'CR_Znn_LF'), (6, 'CR_Znn_4J_TT'), 
-            (7, 'CR_Znn_BB'), (8, 'CR_Znn_2J_CC')
-        ],
+        #######for 2024 test
+        # 'Zee': [
+        #     # CR区域（按pt分bin）
+        #     # (1, 'CR_Zee_BB_pt0_60'),
+        #     # (2, 'CR_Zee_BB_pt60_120'),
+        #     # (3, 'CR_Zee_BB_pt120_200'),
+        #     # (4, 'CR_Zee_BB_pt200_300'),
+        #     # (5, 'CR_Zee_BB_pt300_450'),
+        #     # (6, 'CR_Zee_BB_pt450_inf'),
+
+        #     # # SR区域（按pt分bin）
+        #     (7, 'SR_Zee_BB_pt0_60'),
+        #     (8, 'SR_Zee_BB_pt60_120'),
+        #     (9, 'SR_Zee_BB_pt120_200'),
+        #     (10, 'SR_Zee_BB_pt200_300'),
+        #     (11, 'SR_Zee_BB_pt300_450'),
+        #     (12, 'SR_Zee_BB_pt450_inf'),
+
+        #     # inclusive bins
+        #     (13, 'CR_Zee_BB'),      # inclusive CR bin
+        #     (14, 'SR_Zee_BB'),      # inclusive SR bin
+
+        # ],
     }
-
+    
+    # Add observations and processes
     for chn in chns:
-        cb.AddObservations( ['*'], ['vhcc'], ['13p6TeV'], [chn], cats[chn])
-        cb.AddProcesses( ['*'], ['vhcc'], ['13p6TeV'], [chn], sig_procs[chn], cats[chn], True)
-        cb.AddProcesses( ['*'], ['vhcc'], ['13p6TeV'], [chn], bkg_procs[chn], cats[chn], False)
-
+        cb.AddObservations(['*'], ['vhqq'], ['13p6TeV'], [chn], cats[chn])
+        cb.AddProcesses(['*'], ['vhqq'], ['13p6TeV'], [chn], sig_procs[chn], cats[chn], True)
+        cb.AddProcesses(['*'], ['vhqq'], ['13p6TeV'], [chn], bkg_procs[chn], cats[chn], False)
+    
+    # 添加公共系统误差（syst.py 中的 rateParams 已经修改为支持 1-14 bins）
     systs.AddCommonSystematics(cb, year)
-
 
     if args.bbb==0:
         cb.AddDatacardLineAtEnd("* autoMCStats -1")
@@ -131,46 +129,39 @@ def createCards():
 
     for chn in chns:
         if chn in ['Zll','Zmm','Zee']:
-            input_root_file = "./vhqq_shapes_"+year+"_2L.root"
+            input_root_file = "vhqq_shapes_"+year+"_2L.root"
         elif chn in ['Wln','Wmn','Wen']:
-            input_root_file = "./vhqq_shapes_"+year+"_1L.root"
+            input_root_file = "vhqq_shapes_"+year+"_1L.root"
         elif chn in ['Znn']:
-            input_root_file = "./vhqq_shapes_"+year+"_0L.root"
+            input_root_file = "vhqq_shapes_"+year+"_0L.root"
 
-        cb.cp().channel([chn]).signals().bin_id([1,2,3,4,5,6,7,8,9,10,11,12,13]).ExtractShapes(
-            # input_root_file, year+'_$BIN/$PROCESS_nominal', 'Shape_$BIN_$PROCESS_$SYSTEMATIC')
+        # 提取所有 14 个 bins 的形状
+        all_bins = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16] #[7,8,9,10,11,12,13,14]# [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+        cb.cp().channel([chn]).signals().bin_id(all_bins).ExtractShapes(
             input_root_file, year+'_$BIN/$PROCESS_nominal', year+'_$BIN/$PROCESS_$SYSTEMATIC')
-        cb.cp().channel([chn]).backgrounds().bin_id([1,2,3,4,5,6,7,8,9,10,11,12,13]).ExtractShapes(
-            # input_root_file, year+'_$BIN/$PROCESS_nominal', 'Shape_$BIN_$PROCESS_$SYSTEMATIC')
+        cb.cp().channel([chn]).backgrounds().bin_id(all_bins).ExtractShapes(
             input_root_file, year+'_$BIN/$PROCESS_nominal', year+'_$BIN/$PROCESS_$SYSTEMATIC')
 
 
-    # Use one bin in TT CR for Zll channels:
-    # cb.cp().channel(['Zee','Zmm']).bin_id([7,8]).VariableRebin([0.,1.])
-
+    # 设置标准bin名称
     ch.SetStandardBinNames(cb)
 
+    # 创建CardWriter
+    writer = ch.CardWriter("output_Hqq/" + args.output_folder + "_" + year + "/$TAG/$BIN_"+year+".txt",
+                           "output_Hqq/" + args.output_folder + "_" + year +"/$TAG/shapes/shapes_$BIN_"+year+".root")
 
-    writer=ch.CardWriter("output_Hqq/" + args.output_folder + "_" + year + "/$TAG/$BIN_"+year+".txt",
-                         "output_Hqq/" + args.output_folder + "_" + year +"/$TAG/shapes/shapes_$BIN_"+year+".root")
-
-
-
+    # 过滤零产额的过程和系统误差
     cb.FilterProcs(lambda x: drop_zero_procs(cb,x))
     cb.FilterSysts(lambda x: drop_zero_systs(x))
-
 
     writer.SetWildcardMasses([])
     writer.SetVerbosity(0)
 
-    writer.WriteCards("./",cb)
-
+    # 写入datacards
+    writer.WriteCards("./", cb)
 
 
 if __name__ == "__main__":
-
     print("Hello world")
-
     createCards()
-
     print("... and goodbye.")

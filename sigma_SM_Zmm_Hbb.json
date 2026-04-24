@@ -1,0 +1,76 @@
+{
+  "channel": "Zmm",
+  "decay": "Hbb",
+  "measurement_type": "model-dependent",
+  "assumptions": {
+    "acceptance": "SM",
+    "production_modes": [
+      "ZH",
+      "ggZH"
+    ],
+    "generator_level": "NanoAOD GEN"
+  },
+  "inputs": {
+    "sigma_ZH_inclusive_pb": 0.04722,
+    "sigma_ggZH_inclusive_pb": 0.007900,
+    "br_ratio_Zmumu_over_Zll": 0.333333,
+    "rel_th_zh": 0.03,
+    "rel_th_ggzh": 0.1
+  },
+  "bins": [
+    {
+      "pt_bin": "0_60",
+      "fraction_ZH": 0.3940465198032984,
+      "fraction_ggZH": 0.10847936829898756,
+      "sigma_SM_pb": 0.008167587520593435,
+      "unc_stat_pb": 7.048493081000382e-06,
+      "unc_th_pb": 0.00023889286437197194,
+      "unc_tot_pb": 0.00023899682404282757
+    },
+    {
+      "pt_bin": "60_120",
+      "fraction_ZH": 0.3794757781501275,
+      "fraction_ggZH": 0.34246542314750356,
+      "sigma_SM_pb": 0.008408047587255777,
+      "unc_stat_pb": 7.109105097556501e-06,
+      "unc_th_pb": 0.00024177160649207108,
+      "unc_tot_pb": 0.00024187610274900033
+    },
+    {
+      "pt_bin": "120_200",
+      "fraction_ZH": 0.16340476499620168,
+      "fraction_ggZH": 0.44153378567490226,
+      "sigma_SM_pb": 0.004290834161066862,
+      "unc_stat_pb": 1.2515678171097173e-05,
+      "unc_th_pb": 0.0001408445608116721,
+      "unc_tot_pb": 0.0001413995491871006
+    },
+    {
+      "pt_bin": "200_300",
+      "fraction_ZH": 0.0462845428717404,
+      "fraction_ggZH": 0.09295134451711988,
+      "sigma_SM_pb": 0.0011421852674715943,
+      "unc_stat_pb": 2.513967873061385e-05,
+      "unc_th_pb": 3.504024594410747e-05,
+      "unc_tot_pb": 4.312565689357112e-05
+    },
+    {
+      "pt_bin": "300_450",
+      "fraction_ZH": 0.013300377942964894,
+      "fraction_ggZH": 0.013393912715788195,
+      "sigma_SM_pb": 0.0002978664905036592,
+      "unc_stat_pb": 4.783657172075316e-05,
+      "unc_th_pb": 8.581527819068778e-06,
+      "unc_tot_pb": 4.8600207959474947e-05
+    },
+    {
+      "pt_bin": "450_inf",
+      "fraction_ZH": 0.0034880162356670566,
+      "fraction_ggZH": 0.0011761656456985212,
+      "sigma_SM_pb": 7.278992710867009e-05,
+      "unc_stat_pb": 9.488152412967604e-05,
+      "unc_th_pb": 2.1202883000750553e-06,
+      "unc_tot_pb": 9.490521188873524e-05
+    }
+  ]
+}
