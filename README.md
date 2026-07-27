@@ -20,8 +20,7 @@
 1. **Generate ratios** using the `gridpick_CERN_CMS` tool (outside this directory).
 2. Run `xxx_auto.py` to extract these ratios and perform the fit.
 3. Run `Get_ration_vs_HWorHB_fitResult.py` to extract and format the fit coefficients (filtering only those used in `physics_model_SMEFT.py`).
-4. (Optional) Use `make_smeft_results.py` to produce plots.
-5. Execute the main scan via `run_smeft_scan.sh`.
+4. Execute the main scan via run_smeft_scan.sh. It uses physics_model_SMEFT.py to define the module and make_smeft_results.py to produce plots.
 
 ---
 
