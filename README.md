@@ -1,6 +1,6 @@
 ---
 
-# Part 2:SMEFT Combine Directory – Fitting & Results Extraction
+# Part 2: SMEFT Combine Directory – Fitting & Results Extraction
 
 **Directory:**  
 `/eos/user/h/haozhong/Combine/CMSSW_14_1_0_pre4/src/CombineHarvester/VHccCoHa_STXS_ptbinned_20260727`
