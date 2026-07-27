@@ -1,13 +1,7 @@
----
-
 # Part 2: SMEFT Combine Directory – Fitting & Results Extraction
 
 **Directory:**  
-`/eos/user/h/haozhong/Combine/CMSSW_14_1_0_pre4/src/CombineHarvester/VHccCoHa_STXS_ptbinned_20260727`
-
-This directory contains the workflow for extracting SMEFT fitting coefficients from LHE-level gridpack outputs, performing fits, and visualising the results.
-
----
+`/eos/user/h/haozhong/Combine/CMSSW_14_1_0_pre4/src/CombineHarvester/VHccCoHa_STXS_ptbinned_20260727` 
 
 ## Scripts Overview
 
