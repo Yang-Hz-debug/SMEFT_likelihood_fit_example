@@ -20,9 +20,9 @@ MAKER="${BASE}/make_diffxsec_results.py"   # your rewritten script
 
 # --- runtime knobs ---
 ASIMOV="${ASIMOV:-1}"          # 1 => -t -1, 0 => observed
-POINTS="${POINTS:-21}"
-RMIN="${RMIN:--5}"
-RMAX="${RMAX:-4}"
+POINTS="${POINTS:-160}"
+RMIN="${RMIN:--20}"
+RMAX="${RMAX:-20}"
 FREEZE_NUIS="${FREEZE_NUIS:-0}"  # 1 => freezeParameters all
 DEBUG="${DEBUG:-0}"
 
@@ -71,11 +71,11 @@ SET_RANGES=$(IFS=:; echo "${POIS[*]/%/=${RMIN},${RMAX}}")
 
 MIN_OPTS=(
   --robustFit 1
-  --cminDefaultMinimizerStrategy 0
+  --cminDefaultMinimizerStrategy 2
   --cminPreScan
   --cminFallbackAlgo "Minuit2,0:0.1"
-  --X-rtd MINIMIZER_MaxCalls=10000
-  --X-rtd MINIMIZER_MaxIterations=10000
+  --X-rtd MINIMIZER_MaxCalls=40000
+  --X-rtd MINIMIZER_MaxIterations=40000
 )
 
 # ------------------------------------------------------------
@@ -162,7 +162,8 @@ build_workspace() {
   text2workspace.py "${CARD}" \
     -m "${MASS}" \
     -P physics_model_diffXsec:diffXsecModel \
-    -o "${DEST}/ws_${LABEL}.root"
+    -o "${DEST}/ws_${LABEL}.root" \
+    --X-no-check-norm
 }
 
 # ------------------------------------------------------------
@@ -173,16 +174,7 @@ run_scans() {
   mkdir -p "${SCANDIR}"
   cd "${SCANDIR}"
 
-  #echo ">>> [${LABEL}] Best fit" >&2
-  #combine -M MultiDimFit "${WS}" \
-  #  -m "${MASS}" "${ASIMOV_OPTS[@]}" \
-  #  --setParameters "${SET_PARAMS}" \
-  #  --setParameterRanges "${SET_RANGES}" \
-  #  "${MIN_OPTS[@]}" "${FREEZE_OPTS[@]}" "${DBG_OPTS[@]}" \
-  #  --algo=none \
-  #  --saveWorkspace \
-  #  --saveFitResult \
-  #  -n "_bestfit"
+
 
   echo ">>> [${LABEL}] 1D scans" >&2
   for p in "${POIS[@]}"; do
@@ -209,10 +201,56 @@ plot_scans() {
   for p in "${POIS[@]}"; do
     local f="higgsCombine_scan_${p}.MultiDimFit.mH${MASS}.root"
     [[ -f "${f}" ]] || continue
-    plot1DScan.py "${f}" --POI "${p}" --main-label "${LABEL}" --output "scan_${LABEL}_${p}"
+    plot1DScan.py "${f}" --POI "${p}" --main-label "${LABEL}" --output "scan_${LABEL}_${p}" --logo-sub "Preliminary"
   done
 }
-
+############################## def Run impacts ####################
+run_impacts() {
+  local LABEL="$1" WS="$2" IMPACTDIR="$3"
+  mkdir -p "${IMPACTDIR}"
+  cd "${IMPACTDIR}"
+  
+  # 定义参数范围（与你的扫描范围一致）
+  local PARAM_RANGE="--rMin=${RMIN} --rMax=${RMAX}"
+  
+  # 基础参数（与你的 MIN_OPTS 保持一致）
+  local BASE_OPTS=(
+    --robustFit 1
+    --cminFallbackAlgo "Minuit2,0:0.1"
+    --X-rtd MINIMIZER_MaxCalls=40000
+    --X-rtd MINIMIZER_MaxIterations=40000
+    --X-rtd FAST_VERTICAL_MORPH
+  )
+  
+  echo ">>> [${LABEL}] Impacts - initial fit" >&2
+  combineTool.py -M Impacts -d "${WS}" \
+    -m "${MASS}" "${ASIMOV_OPTS[@]}" \
+    --setParameters "${SET_PARAMS}" \
+    --setParameterRanges "${SET_RANGES}" \
+    "${BASE_OPTS[@]}" "${FREEZE_OPTS[@]}" "${DBG_OPTS[@]}" \
+    --doInitialFit --allPars \
+    -n "_impact_${LABEL}"
+  
+  echo ">>> [${LABEL}] Impacts - full fits (this may take a while)" >&2
+  combineTool.py -M Impacts -d "${WS}" \
+    -m "${MASS}" "${ASIMOV_OPTS[@]}" \
+    --setParameters "${SET_PARAMS}" \
+    --setParameterRanges "${SET_RANGES}" \
+    "${BASE_OPTS[@]}" "${FREEZE_OPTS[@]}" "${DBG_OPTS[@]}" \
+    --doFits --allPars --parallel 4 \
+    -n "_impact_${LABEL}"
+  
+  echo ">>> [${LABEL}] Impacts - collect results" >&2
+  combineTool.py -M Impacts -d "${WS}" \
+    -m "${MASS}" -n "_impact_${LABEL}" \
+    --setParameters "${SET_PARAMS}" \
+    --setParameterRanges "${SET_RANGES}" \
+    -o "impacts_${LABEL}.json" --allPars
+  
+  echo ">>> [${LABEL}] Impacts - plot" >&2
+  plotImpacts.py -i "impacts_${LABEL}.json" -o "impacts_${LABEL}" --cms-label "Preliminary"
+}
+##############################################
 make_results() {
   local LABEL="$1" SCANDIR="$2"
   python3 "${MAKER}" \
@@ -224,22 +262,6 @@ make_results() {
     --pois "${POIS[@]}"
 }
 
-# run_era() {
-#   local LABEL="$1" DIR="$2"
-#   local WSDIR="${OUTBASE}/${LABEL}/workspace"
-#   local SCANDIR="${OUTBASE}/${LABEL}/scans"
-#   mkdir -p "${WSDIR}" "${SCANDIR}"
-
-#   need_file "${DIR}/vhqq_Zee_1_13p6TeV.txt"
-#   need_file "${DIR}/vhqq_Zee_6_13p6TeV.txt"
-
-#   local CARD
-#   CARD="$(build_era_card "${LABEL}" "${DIR}" "${WSDIR}")"
-#   build_workspace "${LABEL}" "${CARD}" "${WSDIR}"
-#   run_scans "${LABEL}" "${WSDIR}/ws_${LABEL}.root" "${SCANDIR}"
-#   plot_scans "${LABEL}" "${SCANDIR}"
-#   make_results "${LABEL}" "${SCANDIR}"
-# }
 run_era() {
   local LABEL="$1" DIR="$2"
   local WSDIR="${OUTBASE}/${LABEL}/workspace"
@@ -255,7 +277,8 @@ run_era() {
   build_workspace "${LABEL}" "${CARD}" "${WSDIR}"
   run_scans "${LABEL}" "${WSDIR}/ws_${LABEL}.root" "${SCANDIR}"
   plot_scans "${LABEL}" "${SCANDIR}"
-  make_results "${LABEL}" "${SCANDIR}"
+  # make_results "${LABEL}" "${SCANDIR}"
+  # run_impacts "${LABEL}" "${WSDIR}/ws_${LABEL}.root" "${SCANDIR}/impacts"  #########if only scan can commen this line
 }
 run_combo() {
   local LABEL="$1"; shift
@@ -269,21 +292,26 @@ run_combo() {
   build_workspace "${LABEL}" "${CARD}" "${WSDIR}"
   run_scans "${LABEL}" "${WSDIR}/ws_${LABEL}.root" "${SCANDIR}"
   plot_scans "${LABEL}" "${SCANDIR}"
-  make_results "${LABEL}" "${SCANDIR}"
+  # make_results "${LABEL}" "${SCANDIR}"
+  #run_impacts "${LABEL}" "${WSDIR}/ws_${LABEL}.root" "${SCANDIR}/impacts"   #########if only scan can commen this line
 }
 
 # ---------------- run eras ----------------
-run_era "2022_preEE"    "${DIR_22_PRE}"
-run_era "2022_postEE"   "${DIR_22_POST}"
-run_era "2023_preBPix"  "${DIR_23_PRE}"
-run_era "2023_postBPix" "${DIR_23_POST}"
+# run_era "2022_preEE"    "${DIR_22_PRE}"
+# run_era "2022_postEE"   "${DIR_22_POST}"
+# run_era "2023_preBPix"  "${DIR_23_PRE}"
+# run_era "2023_postBPix" "${DIR_23_POST}"
 # run_era "2024" "${DIR_24}"
 # ---------------- run combos ----------------
-run_combo "2022" "${DIR_22_PRE}" "${DIR_22_POST}"
-run_combo "2023" "${DIR_23_PRE}" "${DIR_23_POST}"
+# run_combo "2022" "${DIR_22_PRE}" "${DIR_22_POST}"
+# run_combo "2023" "${DIR_23_PRE}" "${DIR_23_POST}"
 # run_combo "Run3_2223" "${DIR_23_PRE}" "${DIR_23_POST}" "${DIR_22_PRE}" "${DIR_22_POST}"
 run_combo "Run3_full" "${DIR_22_POST}" "${DIR_22_PRE}" "${DIR_23_PRE}" "${DIR_23_POST}" "${DIR_24}"
 
 echo "============================================================"
 echo " DONE – outputs in ${OUTBASE}"
 echo "============================================================"
+
+
+
+

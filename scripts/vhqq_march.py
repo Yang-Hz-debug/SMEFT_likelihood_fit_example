@@ -176,7 +176,6 @@ def createCards():
 
     ch.SetStandardBinNames(cb)
 
-
     # writer=ch.CardWriter("output_Hbb_20260414/" + args.output_folder +  "/$TAG/$BIN_"+year+".txt",
     #                      "output_Hbb_20260414/" + args.output_folder  +  "/$TAG/shapes/shapes_$BIN_"+year+".root")
 
@@ -191,6 +190,54 @@ def createCards():
     writer.SetVerbosity(0)
 
     writer.WriteCards("./",cb)
+
+
+    # 修改observation值
+    output_base = f"output_Hbb_20260414/{year}"
+    #modify_observation_in_cards(output_base, target_value=999999)
+
+
+def modify_observation_in_cards(output_dir, target_value=999999):
+    """修改datacard中的observation值"""
+    import re
+    
+    modified_count = 0
+    file_count = 0
+    
+    for root, dirs, files in os.walk(output_dir):
+        for file in files:
+            if file.endswith('.txt'):
+                filepath = os.path.join(root, file)
+                file_count += 1
+                
+                with open(filepath, 'r') as f:
+                    lines = f.readlines()
+                
+                new_lines = []
+                modified = False
+                for line in lines:
+                    if re.match(r'^\s*observation\s+', line, re.IGNORECASE):
+                        old_parts = line.split()
+                        if len(old_parts) >= 2:
+                            old_value = old_parts[1]
+                            new_line = f"observation  {target_value}.0\n"
+                            new_lines.append(new_line)
+                            modified = True
+                            print(f"  {os.path.basename(filepath)}: {old_value} -> {target_value}.0")
+                        else:
+                            new_lines.append(line)
+                    else:
+                        new_lines.append(line)
+                
+                if modified:
+                    with open(filepath, 'w') as f:
+                        f.writelines(new_lines)
+                    modified_count += 1
+    
+    if modified_count == 0:
+        print("  No observation lines found to modify!")
+    else:
+        print(f"\n  Summary: Modified {modified_count} out of {file_count} datacard files")
 
 
 
